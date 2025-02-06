@@ -11,6 +11,7 @@ export default function Cart() {
     
   return (
     <section>
+      <h2>Cart</h2>
       {items.map(item => {
         <div key={item.id}>{}</div>
       })}

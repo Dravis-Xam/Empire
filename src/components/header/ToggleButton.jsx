@@ -2,12 +2,13 @@ import React from 'react';
 import { useDispatch } from 'react-redux';
 import { toggleVisibility } from './visibilitySlice';
 import images from "./imagesUrls"
+import "./supButtons.css"
 
 const ToggleButton = () => {
     const dispatch = useDispatch();
 
     return (
-        <button onClick={() => dispatch(toggleVisibility())}>
+        <button className= "toggle-cart-btn" onClick={() => dispatch(toggleVisibility())}>
             <img src={images.cart}/>
         </button>
     );

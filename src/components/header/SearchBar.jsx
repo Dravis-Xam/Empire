@@ -15,7 +15,7 @@ export default function SearchBar() {
     };
 
     const handleSearch = () => {
-        console.log('Search Query:', searchQuery); 
+        console.log('Search Query:', searchQuery); // to be replaced with actual logic
     };
 
     return (
