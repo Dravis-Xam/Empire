@@ -1,23 +1,21 @@
-import React, { useState } from 'react'
+import React from 'react'
 import './Header.css'
-
+import ToggleButton from './ToggleButton'
+import Profile from './Profile'
+import SignIn from './SignIn'
+import SearchBar from './SearchBar'
 
 
 export default function Header() {
 
-    const [loading, setLoading] = useState(true)
-
-    const openCart = () => {
-
-    }
-
   return (
-    <section>
+    <section className='header'>
       <h1>Empire Hub Phones</h1>
+      <SearchBar />
       <div className="t-options">
-        <button onClick={openCart}>Cart<span>{}</span></button>
-        <button>Profile</button>
-        <button>Sign in</button>
+        <ToggleButton />
+        <Profile />
+        <SignIn />
       </div>
     </section>
   )
