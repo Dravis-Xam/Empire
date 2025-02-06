@@ -1,0 +1,9 @@
+.items-card-container {
+    display: flex;
+    margin: 100px;
+    width: 90%;
+    flex-wrap: wrap;
+    gap: 16px;
+    padding: 16px;
+    justify-content: center;
+}

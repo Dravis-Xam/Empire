@@ -1,0 +1,95 @@
+.cart {
+    position: fixed;
+    top: 30%;
+    left: 9%;
+    background-color: white;
+    border: 1px solid #ccc;
+    border-radius: 8px;
+    padding: 16px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    z-index: 1000;
+    width: 80%; /* Adjust width as needed */
+}
+
+.cart h2 {
+    margin: 0 0 16px 0;
+    font-size: 1.5rem;
+    font-family: Montserrat;
+    color: #333;
+}
+
+.cart-items {
+    font-family: Montserrat;
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+}
+
+.cart-item {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 8px;
+    border: 1px solid #eee;
+    border-radius: 4px;
+    background-color: #f9f9f9;
+    font-size: 1rem;
+    color: #555;
+}
+
+.cart-item span {
+    flex: 1;
+    margin: 0 8px;
+}
+
+.info-cart {
+    height: 50px;
+    width: fit-content;
+    font-family: Montserrat;
+}
+  
+  .item-checkbox {
+    margin-right: 10px;
+  }
+  
+  .bulk-actions {
+    margin-top: 20px;
+    display: flex;
+    gap: 10px;
+    justify-content: flex-end;
+  }
+  
+  .delete-btn, .delete-all-btn {
+    padding: 8px 16px;
+    border: none;
+    border-radius: 4px;
+    cursor: pointer;
+    transition: background-color 0.2s;
+    transition: all .3s ease-in-out;
+  }
+  
+  .delete-btn {
+    background-color: #ff4444;
+    color: white;
+  }
+  
+  .delete-btn:disabled {
+    background-color: #ff9999;
+    cursor: not-allowed;
+  }
+  
+  .delete-all-btn {
+    background-color: #ff6666;
+    color: white;
+  }
+  
+  .delete-btn:hover:not(:disabled),
+  .delete-all-btn:hover {
+    background-color: #cc0000;
+  }
+  
+  .info-cart {
+    margin: 10px 0;
+    color: #666;
+    font-style: italic;
+  }
