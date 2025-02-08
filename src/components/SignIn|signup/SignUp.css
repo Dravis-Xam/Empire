@@ -1,0 +1,107 @@
+.sign-up {
+    background-color: rgba(0, 255, 255, .7);
+    width: 90%;
+    overflow: hidden;
+    padding: 20px;
+    top: 120px;
+    position: relative;
+    border-radius: 5px;
+    display: flex;
+    align-items: center;
+    justify-content: space-evenly;
+    flex-wrap: nowrap;
+    flex-direction: column;
+    padding-top: 10px;
+    margin-bottom: 50px;
+    padding-bottom: 20px;
+    z-index: 100;
+}
+
+.form-title {
+    font-family: Montserrat;
+
+}
+
+.input-container {
+    position: relative;
+    margin-bottom: 15px;
+    width: 100%;
+  }
+  
+  .label {
+    position: absolute;
+    font-family: Montserrat;
+    top: 10px; /* Initial position */
+    left: 10px;
+    font-size: 16px;
+    color: #999;
+    transition: all 0.3s ease; /* Smooth transition */
+    pointer-events: none; /* Ensure the label doesn't interfere with input clicks */
+  }
+  
+  .input {
+    width: 100%;
+    padding: 10px;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+    font-family: Montserrat;
+    font-size: 16px;
+  }
+  
+  .input:focus {
+    outline: none;
+    border-color: #007bff; 
+  }
+  
+  .input-container:focus-within .label {
+    left: -100px;    
+    font-weight: 600;  
+    color: white; 
+  }
+
+  .submit-button {
+    font-family: Montserrat;
+    text-align: center;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: white;
+    background-color:rgba(162, 0, 255, 0.7);
+    padding: 4px 8px;
+    cursor: pointer;
+    border-radius: 40px;
+    font-size: 16px;
+    left: 40%;
+    transition: all .3 ease-in-out;
+    position: relative;
+  }
+
+  .submit-button:hover {
+    scale:  1.2;
+  }
+
+  .submit-button:active {
+    background-color: white;
+    color: rgba(162, 0, 255, 0.7);
+  }
+
+  .close-btn {
+    position: absolute;
+    z-index: 100;
+    font-weight: 900;
+    font-family: Montserrat;
+    font-size: 16px;
+    top: 10px;
+    right: 10px;
+    background-color: transparent;
+    padding: 5px;
+    width: 25px;
+    height: 25px;
+    text-align: center;
+    color: white;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border-radius: 20px;
+}
