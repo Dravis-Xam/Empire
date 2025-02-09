@@ -1,107 +1,137 @@
-.sign-up {
-    background-color: rgba(0, 255, 255, .7);
-    width: 90%;
-    overflow: hidden;
-    padding: 20px;
-    top: 120px;
-    position: relative;
-    border-radius: 5px;
-    display: flex;
-    align-items: center;
-    justify-content: space-evenly;
-    flex-wrap: nowrap;
-    flex-direction: column;
-    padding-top: 10px;
-    margin-bottom: 50px;
-    padding-bottom: 20px;
-    z-index: 100;
+.sign-up-form {
+  background-color: rgba(0, 255, 255, 0.7); /* Semi-transparent cyan background */
+  width: 90%;
+  max-width: 500px; /* Limit maximum width for better readability */
+  padding: 30px;
+  position: relative;
+  border-radius: 10px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 20px; /* Consistent spacing between elements */
+  margin: 120px auto 50px; /* Centered with top margin */
+  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2); /* Subtle shadow for depth */
+  z-index: 100;
+  font-family: Montserrat;
 }
 
 .form-title {
-    font-family: Montserrat;
-
+  font-family: Montserrat, sans-serif;
+  font-size: 24px;
+  font-weight: 600;
+  color: #333;
+  margin-bottom: 10px;
 }
 
 .input-container {
-    position: relative;
-    margin-bottom: 15px;
-    width: 100%;
-  }
-  
-  .label {
-    position: absolute;
-    font-family: Montserrat;
-    top: 10px; /* Initial position */
-    left: 10px;
-    font-size: 16px;
-    color: #999;
-    transition: all 0.3s ease; /* Smooth transition */
-    pointer-events: none; /* Ensure the label doesn't interfere with input clicks */
-  }
-  
-  .input {
-    width: 100%;
-    padding: 10px;
-    border: 1px solid #ccc;
-    border-radius: 4px;
-    font-family: Montserrat;
-    font-size: 16px;
-  }
-  
-  .input:focus {
-    outline: none;
-    border-color: #007bff; 
-  }
-  
-  .input-container:focus-within .label {
-    left: -100px;    
-    font-weight: 600;  
-    color: white; 
-  }
+  position: relative;
+  width: 100%;
+  margin-bottom: 20px;
+}
 
-  .submit-button {
-    font-family: Montserrat;
-    text-align: center;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    color: white;
-    background-color:rgba(162, 0, 255, 0.7);
-    padding: 4px 8px;
-    cursor: pointer;
-    border-radius: 40px;
-    font-size: 16px;
-    left: 40%;
-    transition: all .3 ease-in-out;
-    position: relative;
-  }
+.label {
+  position: absolute;
+  font-family: 'Montserrat', sans-serif;
+  top: 12px;
+  left: 12px;
+  font-size: 16px;
+  color: #999;
+  transition: all 0.3s ease;
+  pointer-events: none;
+}
 
-  .submit-button:hover {
-    scale:  1.2;
-  }
+.input {
+  width: 100%;
+  padding: 12px;
+  border: 1px solid #ccc;
+  border-radius: 6px;
+  font-family: 'Montserrat', sans-serif;
+  font-size: 16px;
+  background-color: rgba(255, 255, 255, 0.9); /* Slightly transparent white */
+  transition: border-color 0.3s ease;
+}
 
-  .submit-button:active {
-    background-color: white;
-    color: rgba(162, 0, 255, 0.7);
-  }
+.input:focus {
+  outline: none;
+  border-color: #007bff; /* Blue border on focus */
+  box-shadow: 0 0 5px rgba(0, 123, 255, 0.5); /* Subtle glow effect */
+}
 
-  .close-btn {
-    position: absolute;
-    z-index: 100;
-    font-weight: 900;
-    font-family: Montserrat;
-    font-size: 16px;
-    top: 10px;
-    right: 10px;
-    background-color: transparent;
-    padding: 5px;
-    width: 25px;
-    height: 25px;
-    text-align: center;
-    color: white;
-    cursor: pointer;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    border-radius: 20px;
+.input-container:focus-within .label,
+.input:not(:placeholder-shown) + .label {
+  top: -10px;
+  left: 10px;
+  font-size: 14px;
+  font-weight: 600;
+  color: #007bff; /* Blue label color when input is focused or filled */
+  background-color: rgba(255, 255, 255, 0.9); /* White background for label */
+  padding: 0 5px;
+  border-radius: 4px;
+}
+
+.submit-button {
+  font-family: Montserrat, sans-serif;
+  font-size: 16px;
+  font-weight: 600;
+  color: white;
+  background-color: rgba(162, 0, 255, 0.7); /* Semi-transparent purple */
+  padding: 12px 24px;
+  border: none;
+  border-radius: 40px;
+  cursor: pointer;
+  transition: all 0.3s ease-in-out;
+  width: 100%; /* Full width for better mobile responsiveness */
+  max-width: 200px; /* Limit maximum width */
+  text-align: center;
+}
+
+.submit-button:hover {
+  transform: scale(1.05); /* Slight scale-up on hover */
+  background-color: rgba(162, 0, 255, 0.9); /* Less transparency on hover */
+}
+
+.submit-button:active {
+  background-color: white;
+  color: rgba(162, 0, 255, 0.7); /* Invert colors on click */
+  transform: scale(0.95); /* Slight scale-down on click */
+}
+
+.close-btn {
+  position: absolute;
+  top: 15px;
+  right: 15px;
+  font-family: Montserrat, sans-serif;
+  font-size: 18px;
+  font-weight: 900;
+  color: white;
+  background-color: transparent;
+  border: none;
+  width: 30px;
+  height: 30px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border-radius: 50%;
+  cursor: pointer;
+  transition: all 0.3s ease;
+}
+
+.close-btn:hover {
+  background-color: rgba(255, 255, 255, 0.2); /* Light background on hover */
+  color: #ff0000; /* Red color on hover */
+}
+
+.close-btn:active {
+  transform: scale(0.9); /* Slight scale-down on click */
+}
+
+.sign-in-btn {
+  color: green;
+  font-weight: 900;
+  font-size: 16px;
+  font-family: Montserrat;
+}
+
+.sign-in-btn:active {
+  color: black;
 }

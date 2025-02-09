@@ -1,52 +1,47 @@
-import React, { useState } from 'react';
+import React from 'react';
+import { useDispatch, useSelector } from 'react-redux';
+import { closeSignUpForm, openSignInForm } from '../SignIn|signup/authSlice'; // Import openSignInForm
 import './SignUp.css';
 
-export default function SignUp({ isOpen, onClose }) {
-  const handleSubmit = (e) => {
-    e.preventDefault();
-    // Handle form submission (e.g., send data to an API)
-    console.log('Form submitted');
-  };
+export default function SignUpForm() {
+  const dispatch = useDispatch();
+  const isSignUpFormOpen = useSelector((state) => state.auth.isSignUpFormOpen);
 
-  const [isVisible, setIsVisible] = useState(true);
-
-  if (!isOpen || !isVisible) return null;
+  if (!isSignUpFormOpen) return null;
 
   return (
-    <div className='sign-up'>
-      <button
-        className='close-btn'
-        onClick={() => {
-          setIsVisible(false);
-          onClose(); // Make sure onClose is called to close the modal
-        }}
-      >
-        x
-      </button>
-      <h1 className='form-title'>Sign Up</h1>
-      <form method='POST' action='#' onSubmit={handleSubmit}>
-        <div className="input-container">
-          <div className='label'>Username</div>
-          <input type='text' className='input' name='username' required />
-        </div>
-        <div className="input-container">
-          <div className='label'>Email</div>
-          <input type='email' className='input' name='email' required />
-        </div>
-        <div className="input-container">
-          <div className='label'>Contact</div>
-          <input type='tel' className='input' name='phone' required />
-        </div>
-        <div className="input-container">
-          <div className='label'>Password</div>
-          <input type='password' className='input' name='password' required />
-        </div>
-        <div className="input-container">
-          <div className='label'>Code</div>
-          <input type='text' className='input' name='verificationCode' required />
-        </div>
-        <button type='submit' className='submit-button'>Sign Up</button>
-      </form>
+    <div className='sign-up-form-overlay'>
+      <div className='sign-up-form'>
+        <button id='close-sign-up-btn' className="close-btn" onClick={() => dispatch(closeSignUpForm())}>×</button>
+        <h2>Sign Up</h2>
+        <form>
+          <div className='input-container'>
+            <input type='text' placeholder=' ' required />
+            <label>Username</label>
+          </div>
+          <div className='input-container'>
+            <input type='email' placeholder=' ' required />
+            <label>Email</label>
+          </div>
+          <div className='input-container'>
+            <input type='password' placeholder=' ' required />
+            <label>Password</label>
+          </div>
+          <button type='submit'>Sign Up</button>
+        </form>
+        <p>
+          Already have an account?{' '}
+          <button
+            onClick={() => {
+              dispatch(closeSignUpForm()); // Close the sign-up form
+              dispatch(openSignInForm());  // Open the sign-in form
+            }}
+            className='sign-in-btn'
+          >
+            Sign in
+          </button>
+        </p>
+      </div>
     </div>
   );
 }

@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
-import { closeSignInForm, signIn } from '../SignIn|signup/authSlice';
-import './SignInForm.css';
+import { closeSignInForm, openSignUpForm } from '../SignIn|signup/authSlice'; // Import openSignUpForm
+import './SignIn.css';
 
 export default function SignInForm() {
   const dispatch = useDispatch();
@@ -11,9 +11,8 @@ export default function SignInForm() {
 
   const handleSubmit = (e) => {
     e.preventDefault();
-    // Perform sign-in logic (e.g., API call)
     console.log('Signing in with:', email, password);
-    dispatch(signIn()); // Update Redux state
+    dispatch(signIn());
   };
 
   if (!isSignInFormOpen) return null;
@@ -21,30 +20,43 @@ export default function SignInForm() {
   return (
     <div className='sign-in-form-overlay'>
       <div className='sign-in-form'>
-        <button className='close-btn' onClick={() => dispatch(closeSignInForm())}>×</button>
+        <button id='close-sign-in-btn' onClick={() => dispatch(closeSignInForm())}>×</button>
         <h2>Sign In</h2>
         <form onSubmit={handleSubmit}>
           <div className='input-container'>
-            <label>Email</label>
             <input
               type='email'
               value={email}
               onChange={(e) => setEmail(e.target.value)}
+              placeholder=' '
               required
             />
+            <label>Email</label>
           </div>
           <div className='input-container'>
-            <label>Password</label>
             <input
               type='password'
               value={password}
               onChange={(e) => setPassword(e.target.value)}
+              placeholder=' '
               required
             />
+            <label>Password</label>
           </div>
           <button type='submit'>Sign In</button>
         </form>
-        <p>Don't have an account? <button onClick={() => dispatch(openSignInForm())}>Sign Up</button></p>
+        <p>
+          Don't have an account?{' '}
+          <button
+            onClick={() => {
+              dispatch(closeSignInForm()); // Close the sign-in form
+              dispatch(openSignUpForm());  // Open the sign-up form
+            }}
+            className='sign-up-btn'
+          >
+            Sign Up
+          </button>
+        </p>
       </div>
     </div>
   );
