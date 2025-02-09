@@ -7,6 +7,7 @@ import Profile from './components/Profile/Profile.jsx';
 import SignIn from './components/SignIn|signup/SignIn';
 import SignUp from './components/SignIn|signup/SignUp';
 import items from './modules/items.jsx';
+import Hero from './components/hero/Hero.jsx';
 
 function App() {
     const isCartVisible = useSelector((state) => state.visibility.isVisible);
@@ -15,6 +16,7 @@ function App() {
     return (
         <>
             <Header />
+            <Hero />
             {!isSignedIn && <SignIn />}
             {!isSignedIn && <SignUp />}
             {isCartVisible && <Cart />}

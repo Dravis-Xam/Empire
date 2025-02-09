@@ -1,0 +1,9 @@
+.hero {
+    height: 500px;
+    width: 100%;
+    position: relative;
+    left: 0;
+    right: 0;
+    top: 120px;
+    background-color: rgba(33, 33, 230, 0.534);
+}
