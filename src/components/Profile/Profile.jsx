@@ -1,16 +1,25 @@
+import React from 'react';
+import { useDispatch } from 'react-redux';
+import { signOut } from '../SignIn|signup/authSlice';
 
-import React from 'react'
+export default function Profile({ onClose }) {
+  const dispatch = useDispatch();
+  // Get actual user data from your Redux store or context
+  const user = { name: 'John Doe' }; 
 
-export default function Profile( {e}) {
+  const handleLogout = () => {
+    dispatch(signOut());
+    onClose();
+  };
+
   return (
-    <div className='Profile'>
-      <h2>                                          
-        {e.name}
-      </h2>
+    <div className='profile-panel'>
+      <button className='close-btn' onClick={onClose}>×</button>
+      <h2>{user.name}</h2>
       <button className="see-acc-btn">Account</button>
-      <button className='log-out-btn'>
-        <img src="https://cdn-icons-png.flaticon.com/128/992/992680.png" alt='log out.'/>
+      <button className='log-out-btn' onClick={handleLogout}>
+        <img src="https://cdn-icons-png.flaticon.com/128/992/992680.png" alt='Log out'/>
       </button>
     </div>
-  )
+  );
 }

@@ -1,7 +1,7 @@
 import React from 'react'
 import './Header.css'
 import ToggleButton from './ToggleButton'
-import Profile from './Profile'
+import ProfileBtn from './ProfileBtn'
 import SignIn from './SignIn'
 import SearchBar from './SearchBar'
 
@@ -14,7 +14,7 @@ export default function Header() {
       <SearchBar />
       <div className="t-options">
         <ToggleButton />
-        <Profile />
+        <ProfileBtn />
         <SignIn />
       </div>
     </section>
