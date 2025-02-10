@@ -1,0 +1,12 @@
+.payment-container {
+    position: relative;
+    background-color: white;
+    color: black;
+    font-family: Montserrat;
+    padding: 20px;
+}
+
+.payment-method-container {
+    display: flex;
+    gap: 10px;
+}

@@ -79,7 +79,7 @@
     display: flex;
     align-items: center;
     gap: 5px;
-    left: -100px;
+    left: -60%;
 }
 
 .comment-section form div input {
@@ -97,7 +97,7 @@
 
 .comment-section form .submit-comment-btn {
     position: absolute;
-    right: -150px;
+    right: 50%;
     bottom: 30px;
 }
 
@@ -105,7 +105,7 @@
     position: relative;
     display: flex;
     align-items: center;
-    justify-content: space-between;
+    justify-content: space-evenly;
     margin-top: 20px;
 }
 
