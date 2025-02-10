@@ -1,5 +1,7 @@
 import newUser from "./addUsers"
 
+const details = {};
+
 const users = [
     {
         name: "Guest",
@@ -9,6 +11,6 @@ const users = [
     }
 ]
 
-users.push(newUser);
+users.push(newUser(details));
 
 export default users

@@ -1,4 +1,6 @@
 
-function newUser( {details} ) {}
+function newUser( {details} ) {
+    return null;
+}
 
-export default newUser                            
+export default newUser;                           

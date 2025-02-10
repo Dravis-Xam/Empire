@@ -8,11 +8,16 @@ function Item({ prop }) {
         <div className="item-card">
             <div className="prop-name">{prop.name}</div>
             <div className="prop-details">
-                <div className="prop-price">- Price: ${prop.price}</div>
-                <div className="prop-ram">- RAM: {prop.details.ram}</div>
-                <div className="prop-storage">- Storage: {prop.details.i_storage}</div>
-                <div className="prop-image-res">
-                    - Image Resolution: {prop.details.i_resolution}
+                <div className='item-details-container'>
+                    <div className="prop-price"> Price: ${prop.price}-</div>
+                    <div className="prop-ram"> RAM: {prop.details.ram}-</div>
+                    <div className="prop-storage"> Storage: {prop.details.i_storage}-</div>
+                    <div className="prop-image-res">
+                         Image Resolution: {prop.details.i_resolution}-
+                    </div>
+                </div>
+                <div className='item-image-container'>
+                    <img src={prop.details.image} alt={prop.name}/>
                 </div>
             </div>
             <div className="add-to-cart">

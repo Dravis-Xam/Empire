@@ -8,6 +8,7 @@ import SignIn from './components/SignIn|signup/SignIn';
 import SignUp from './components/SignIn|signup/SignUp';
 import items from './modules/items.jsx';
 import Hero from './components/hero/Hero.jsx';
+import Footer from './components/footer/Footer.jsx';
 
 function App() {
     const isCartVisible = useSelector((state) => state.visibility.isVisible);
@@ -22,10 +23,12 @@ function App() {
             {isCartVisible && <Cart />}
             {isSignedIn && <Profile />}
             <section className="items-card-container">
-                {items.map((e) => (
-                    <Item key={e.id} prop={e} />
+                <h1 className='items-on-sale-title'>Items On Sale</h1>
+                {items.map((e, index) => (
+                    <Item key={index} prop={e} />
                 ))}
             </section>
+            <Footer />
         </>
     );
 }

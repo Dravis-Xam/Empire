@@ -58,11 +58,17 @@ export default function Cart() {
 
     return (
         <section className="cart" ref={cartRef}>
-            <h2>Cart</h2>
-            <div
-                className="info-cart"
-                style={{ visibility: cartItems.length === 0 ? 'hidden' : 'visible' }}
-            >
+            <div className="cart-header">
+                <h2>Cart</h2>
+                <button 
+                    className="close-btn"
+                    onClick={() => dispatch(toggleVisibility())}
+                    aria-label="Close cart"
+                >
+                    ×
+                </button>
+            </div>
+            <div className="info-cart">
                 {selectedItems.length > 0
                     ? `Selected ${selectedItems.length} of ${cartItems.length} items`
                     : `You have ${cartItems.length} items in your cart`}
@@ -88,6 +94,9 @@ export default function Cart() {
                     </div>
                 ))}
             </div>
+            
+            {cartItems.length > 0 && <button className='toPayment-btn'> Complete </button>}
+            
 
             {cartItems.length > 0 && (
                 <div className="bulk-actions">

@@ -86,10 +86,55 @@
   .delete-btn:hover:not(:disabled),
   .delete-all-btn:hover {
     background-color: #cc0000;
+    scale: 1.1;
   }
   
   .info-cart {
     margin: 10px 0;
-    color: #666;
+    color: #7a7979;
     font-style: italic;
   }
+
+  .toPayment-btn {
+    background-color: rgb(9, 173, 9);
+    color: white;
+    padding: 10px 20px;
+    position: absolute;
+    bottom: 12px;
+    border-radius: 5px;
+  }
+
+  .toPayment-btn:hover {
+    scale: 1.1;
+  }
+
+  button {
+    font-family: Montserrat;
+  }
+
+  /* Cart.css */
+.cart-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 1rem;
+  padding-bottom: 1rem;
+  border-bottom: 1px solid #eee;
+}
+
+.close-btn {
+  background: none;
+  border: none;
+  font-size: 2rem;
+  cursor: pointer;
+  padding: 0 0.5rem;
+  color: #474545;
+  transition: all 0.2s ease;
+  line-height: 1;
+}
+
+.close-btn:hover {
+  color: #eee7e7;
+  transform: scale(1.1);
+}
+
