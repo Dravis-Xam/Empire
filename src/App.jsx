@@ -9,6 +9,7 @@ import SignUp from './components/SignIn|signup/SignUp';
 import items from './modules/items.jsx';
 import Hero from './components/hero/Hero.jsx';
 import Footer from './components/footer/Footer.jsx';
+import Payment from './components/payment/Payment.jsx';
 
 function App() {
     const isCartVisible = useSelector((state) => state.visibility.isVisible);
@@ -28,6 +29,7 @@ function App() {
                     <Item key={index} prop={e} />
                 ))}
             </section>
+            <Payment />
             <Footer />
         </>
     );
