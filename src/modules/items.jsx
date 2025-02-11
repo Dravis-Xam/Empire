@@ -1,4 +1,4 @@
-//impport items form api
+//src/modules/items.jsx
 
 const items = [
     {
@@ -64,7 +64,7 @@ const items = [
     }, {
         name: "OPPO Reno 7",
         price: "60000",
-        itemId: 7001,
+        itemId: 7005,
         details: {
             ram: '16Gb + 16Gb',
             i_storage: "1Tb",

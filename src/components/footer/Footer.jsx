@@ -28,7 +28,7 @@ export default function Footer() {
                     type='text'
                     rows={4}
                     cols={21}
-                    name='commenterMessage'
+                    name='commenterMessage'                
                     required
                 />
             </div>

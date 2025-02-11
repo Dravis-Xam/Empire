@@ -4,6 +4,7 @@ import ToggleButton from './ToggleButton'
 import ProfileBtn from './ProfileBtn'
 import SignIn from './SignIn'
 import SearchBar from './SearchBar'
+import { Link } from 'react-router-dom';
 
 
 export default function Header() {
@@ -15,7 +16,7 @@ export default function Header() {
       <div className="t-options">
         <ToggleButton />
         <ProfileBtn />
-        <SignIn />
+        <Link to="/login"><SignIn /></Link>
       </div>
     </section>
   )

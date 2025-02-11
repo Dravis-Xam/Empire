@@ -1,3 +1,5 @@
+//src/modules/HeroUpdates.jsx
+
 const heroUpdates = [
     {
         id: '001',

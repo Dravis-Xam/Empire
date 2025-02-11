@@ -1,12 +1,86 @@
+.payment-container-overlay {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: rgba(0, 0, 0, 0.5);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  z-index: 1000
+}
+
 .payment-container {
-    position: relative;
+    position: fixed;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
     background-color: white;
     color: black;
     font-family: Montserrat;
     padding: 20px;
-}
-
-.payment-method-container {
+    max-width: 500px;
+    width: 90%;
+    max-height: 90vh;
+    overflow-y: auto;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    border-radius: 8px;
+    z-index: 1000;
+  }
+  
+    
+  .close-btn {
+    position: absolute;
+    top: 10px;
+    right: 10px;
+    background: none;
+    border: none;
+    cursor: pointer;
+    color: #666;
+    transition: color 0.2s ease;
+  }
+  
+  .close-btn:hover {
+    color: #333;
+  }
+  
+  
+  /* Rest of your existing styles... */
+  .payment-method-container {
+    border-bottom: 1px solid #eee;
+    padding: 10px 0;
+  }
+  
+  .method-header {
     display: flex;
-    gap: 10px;
-}
+    justify-content: space-between;
+    align-items: center;
+  }
+  
+  
+  .toggle-btn {
+    background: none;
+    border: none;
+    cursor: pointer;
+    transition: transform 0.3s ease;
+    padding: 5px;
+  }
+  
+  .toggle-btn.expanded {
+    transform: rotate(180deg);
+  }
+  
+  .p-contents {
+    max-height: 0;
+    overflow: hidden;
+    transition: max-height 0.3s ease, padding 0.3s ease;
+    padding-left: 10px;
+  }
+  
+  .p-contents.visible {
+    max-height: 200px; /* Adjust based on content */
+    padding: 10px 0;
+  }
+
+  /* ... other styles remain the same */

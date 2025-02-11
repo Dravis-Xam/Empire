@@ -1,6 +1,10 @@
+
+
+// src/components/item/AddItem.jsx
+
 import React, { useState } from 'react';
 import { useDispatch } from 'react-redux';
-import { addItemToCart } from '../cart/cartSlice';
+import { addItemToCart } from '../../features/cart/cartSlice';
 import { v4 as uuidv4 } from 'uuid';
 
 function AddToCartButton({ item }) {

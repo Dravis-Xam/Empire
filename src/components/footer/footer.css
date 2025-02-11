@@ -88,6 +88,10 @@
 
 }
 
+textarea {
+    resize: none;
+}
+
 
 .comment-section form div label {
     position: absolute;

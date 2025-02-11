@@ -1,30 +1,84 @@
-import React from 'react';
+
+
+// src/components/SignIn|signup/SignUp.jsx
+import React, { useState, useEffect } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
-import { closeSignUpForm, openSignInForm } from '../SignIn|signup/authSlice'; // Import openSignInForm
+import { X } from 'lucide-react';
+import { closeSignUpForm, openSignInForm, signUp, clearError } from '../../features/auth/authSlice';
 import './SignUp.css';
 
 export default function SignUpForm() {
   const dispatch = useDispatch();
   const isSignUpFormOpen = useSelector((state) => state.auth.isSignUpFormOpen);
+  const error = useSelector((state) => state.auth.error);
+  const [username, setUsername] = useState('');
+  const [email, setEmail] = useState('');
+  const [password, setPassword] = useState('');
+
+  useEffect(() => {
+    if (error) {
+      const timer = setTimeout(() => {
+        dispatch(clearError());
+      }, 3000);
+      return () => clearTimeout(timer);
+    }
+  }, [error, dispatch]);
+
+  const handleSubmit = (e) => {
+    e.preventDefault();
+    dispatch(signUp({ username, email, password }))
+      .unwrap()
+      .then(() => {
+        setUsername('');
+        setEmail('');
+        setPassword('');
+      })
+      .catch(() => {
+        setUsername('');
+        setEmail('');
+        setPassword('');
+      });
+  };
 
   if (!isSignUpFormOpen) return null;
 
   return (
     <div className='sign-up-form-overlay'>
       <div className='sign-up-form'>
-        <button id='close-sign-up-btn' className="close-btn" onClick={() => dispatch(closeSignUpForm())}>×</button>
+        <button id='close-sign-up-btn' onClick={() => dispatch(closeSignUpForm())}>
+          <X />
+        </button>
         <h2>Sign Up</h2>
-        <form>
+        {error && <div className="error-message">{error}</div>}
+        <form onSubmit={handleSubmit}>
           <div className='input-container'>
-            <input type='text' placeholder=' ' required />
+            <input
+              type='text'
+              value={username}
+              onChange={(e) => setUsername(e.target.value)}
+              placeholder=' '
+              required
+            />
             <label>Username</label>
           </div>
           <div className='input-container'>
-            <input type='email' placeholder=' ' required />
+            <input
+              type='email'
+              value={email}
+              onChange={(e) => setEmail(e.target.value)}
+              placeholder=' '
+              required
+            />
             <label>Email</label>
           </div>
           <div className='input-container'>
-            <input type='password' placeholder=' ' required />
+            <input
+              type='password'
+              value={password}
+              onChange={(e) => setPassword(e.target.value)}
+              placeholder=' '
+              required
+            />
             <label>Password</label>
           </div>
           <button type='submit'>Sign Up</button>
@@ -33,12 +87,12 @@ export default function SignUpForm() {
           Already have an account?{' '}
           <button
             onClick={() => {
-              dispatch(closeSignUpForm()); // Close the sign-up form
-              dispatch(openSignInForm());  // Open the sign-in form
+              dispatch(closeSignUpForm());
+              dispatch(openSignInForm());
             }}
             className='sign-in-btn'
           >
-            Sign in
+            Sign In
           </button>
         </p>
       </div>

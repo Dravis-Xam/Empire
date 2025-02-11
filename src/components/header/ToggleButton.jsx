@@ -1,6 +1,6 @@
 import React from 'react';
 import { useDispatch } from 'react-redux';
-import { toggleVisibility } from './visibilitySlice';
+import { toggleVisibility } from '../../features/visibility/visibilitySlice';
 import images from "./imagesUrls"
 import "./supButtons.css"
 
