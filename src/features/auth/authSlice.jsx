@@ -1,35 +1,40 @@
 import { createSlice, createAsyncThunk } from '@reduxjs/toolkit';
-import api from '../auth/api';
+import api from './api';
 
 const initialState = {
   token: null,
   isAuthenticated: false,
   loading: false,
   error: null,
+  isSignInFormOpen: false,
+  isSignUpFormOpen: false,
 };
 
-export const login = createAsyncThunk(
-  'auth/login',
+// Async Thunks
+export const signIn = createAsyncThunk(
+  'auth/signIn',
   async ({ email, password }, { rejectWithValue }) => {
     try {
-      // Use the configured API instance
-      const response = await api.post('/login', { email, password });
+      const response = await api.post('/signin', { email, password }); // Changed to lowercase endpoint
       return response.data.token;
     } catch (error) {
-      return rejectWithValue(error.response?.data?.error || 'Login failed');
+      return rejectWithValue(
+        error.response?.data?.error || 'Sign in failed. Please check your credentials.'
+      );
     }
   }
 );
 
-export const signup = createAsyncThunk(
-  'auth/signup',
+export const signUp = createAsyncThunk(
+  'auth/signUp',
   async ({ username, email, password }, { rejectWithValue }) => {
     try {
-      // which confirmed api 
-      const response = await api.post('/signup', { username, email, password });
+      const response = await api.post('/signup', { username, email, password }); // Consistent lowercase
       return response.data.token;
     } catch (error) {
-      return rejectWithValue(error.response?.data?.error || 'Registration failed');
+      return rejectWithValue(
+        error.response?.data?.error || 'Registration failed. Please try again.'
+      );
     }
   }
 );
@@ -38,7 +43,20 @@ const authSlice = createSlice({
   name: 'auth',
   initialState,
   reducers: {
-    logout: (state) => {
+    openSignInForm: (state) => {
+      state.isSignInFormOpen = true;
+    },
+    closeSignInForm: (state) => {
+      state.isSignInFormOpen = false;
+    },
+    openSignUpForm: (state) => {
+      state.isSignUpFormOpen = true;
+      state.isSignInFormOpen = false;
+    },
+    closeSignUpForm: (state) => { // Fixed casing
+      state.isSignUpFormOpen = false;
+    },
+    signOut: (state) => {
       state.token = null;
       state.isAuthenticated = false;
       localStorage.removeItem('authToken');
@@ -50,41 +68,55 @@ const authSlice = createSlice({
         state.isAuthenticated = true;
       }
     },
+    clearError: (state) => {
+      state.error = null;
+    }
   },
   extraReducers: (builder) => {
     builder
-      .addCase(login.pending, (state) => {
+      .addCase(signIn.pending, (state) => {
         state.loading = true;
         state.error = null;
       })
-      .addCase(login.fulfilled, (state, action) => {
+      .addCase(signIn.fulfilled, (state, action) => {
         state.loading = false;
         state.token = action.payload;
         state.isAuthenticated = true;
         localStorage.setItem('authToken', action.payload);
       })
-      .addCase(login.rejected, (state, action) => {
+      .addCase(signIn.rejected, (state, action) => {
         state.loading = false;
         state.error = action.payload;
       })
-      .addCase(signup.pending, (state) => {
+      .addCase(signUp.pending, (state) => {
         state.loading = true;
         state.error = null;
       })
-      .addCase(signup.fulfilled, (state, action) => {
+      .addCase(signUp.fulfilled, (state, action) => {
         state.loading = false;
         state.token = action.payload;
         state.isAuthenticated = true;
         localStorage.setItem('authToken', action.payload);
       })
-      .addCase(signup.rejected, (state, action) => {
+      .addCase(signUp.rejected, (state, action) => {
         state.loading = false;
         state.error = action.payload;
       });
   },
 });
 
-//also missing clearError
+// Export all actions
+export const { 
+  openSignInForm,
+  closeSignInForm,
+  openSignUpForm,
+  closeSignUpForm,
+  signOut,
+  initializeAuth,
+  clearError
+} = authSlice.actions;
 
-export const { logout, initializeAuth } = authSlice.actions;
+// Export aliases
+export { signIn as login, signUp as signup, signOut as logout };
+
 export default authSlice.reducer;

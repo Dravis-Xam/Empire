@@ -1,45 +1,66 @@
-//src/modules/store.jsx
-
-import { configureStore } from '@reduxjs/toolkit';
-import cartReducer from '../features/cart/cartSlice';
-import authReducer from '../features/auth/authSlice';
-import visibilityReducer from '../features/visibility/visibilitySlice';
+import { configureStore, combineReducers } from '@reduxjs/toolkit';
 import { debounce } from 'lodash';
 
-// 1. Load persisted state from localStorage
+const PERSISTENCE_DEBOUNCE = 1000;
+const PERSISTENCE_KEY = 'authState';
+
+const staticReducers = {};
+
+const createRootReducer = (asyncReducers) => combineReducers({
+  ...staticReducers,
+  ...asyncReducers
+});
+
 const loadPersistedState = () => {
   try {
-    const serializedState = localStorage.getItem('authState');
+    const serializedState = localStorage.getItem(PERSISTENCE_KEY);
     return serializedState ? JSON.parse(serializedState) : undefined;
   } catch (error) {
-    console.warn('Failed to load persisted state:', error);
+    console.error('Persisted state loading error:', error);
     return undefined;
   }
 };
 
-// 2. Initialize store with potential persisted state
 const store = configureStore({
-  reducer: {
-    auth: authReducer,
-    cart: cartReducer,
-    visibility: visibilityReducer,
-  },
-  preloadedState: {
-    auth: loadPersistedState()?.auth  // Only preload auth state
-  }
+  reducer: createRootReducer(),
+  preloadedState: loadPersistedState(),
+  middleware: (getDefaultMiddleware) =>
+    getDefaultMiddleware({
+      serializableCheck: {
+        ignoredActions: ['persist/PERSIST'],
+      },
+    }),
 });
 
-// 3. Optimized state persistence
+store.loadReducers = async () => {
+  const { default: authReducer } = await import('../features/auth/authSlice');
+  const { default: cartReducer } = await import('../features/cart/cartSlice');
+  const { default: visibilityReducer } = await import('../features/visibility/visibilitySlice');
+
+  store.replaceReducer(createRootReducer({
+    auth: authReducer,
+    cart: cartReducer,
+    visibility: visibilityReducer
+  }));
+};
+
+store.loadReducers();
+
 const saveState = debounce(() => {
   try {
-    const { auth } = store.getState();
-    localStorage.setItem('authState', JSON.stringify(auth));
+    const state = store.getState();
+    const persistenceState = {
+      auth: {
+        token: state.auth.token,
+        isAuthenticated: state.auth.isAuthenticated,
+      }
+    };
+    localStorage.setItem(PERSISTENCE_KEY, JSON.stringify(persistenceState));
   } catch (error) {
-    console.warn('Failed to persist state:', error);
+    console.error('State persistence failed:', error);
   }
-}, 1000);
+}, PERSISTENCE_DEBOUNCE);
 
-// 4. Subscribe to store changes
 store.subscribe(saveState);
 
 export default store;
