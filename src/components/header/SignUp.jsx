@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import images from './imagesUrls';
+import images from './imagesUrls.jsx';
 import './supButtons.css';
 import SignUp from './SignUp.jsx'; // Import the SignUp component
 

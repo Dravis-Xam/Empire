@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 import { useSelector, useDispatch } from 'react-redux';
-import images from '../header/imagesUrls';
+import images from './imagesUrls';
 import "./supButtons.css";
 import Profile from '../Profile/Profile'; // Import the Profile component
 

@@ -6,7 +6,7 @@ import { initializeAuth } from './features/auth/authSlice';
 import ProtectedRoute from './features/auth/ProtectedRoute';
 import SignInForm from './components/SignIn|signup/SignIn';
 import App from './App';
-
+ 
 function Carrier() {
   const dispatch = useDispatch();
   const { loading } = useSelector((state) => state.auth);

@@ -8,7 +8,7 @@ import Profile from './components/Profile/Profile';
 import items from './modules/items';
 import Hero from './components/hero/Hero';
 import Footer from './components/footer/Footer';
-
+ 
 function App() {
   const isCartVisible = useSelector((state) => state.visibility.isVisible);
   const { isAuthenticated } = useSelector((state) => state.auth);
