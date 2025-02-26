@@ -1,10 +1,16 @@
-
+// ProtectedRoute.jsx
 import { useSelector } from 'react-redux';
-import { Navigate, Outlet } from 'react-router-dom';
+import { Navigate } from 'react-router-dom';
 
-const ProtectedRoute = () => {
+const ProtectedRoute = ({ children }) => {
   const { isAuthenticated } = useSelector((state) => state.auth);
-  return isAuthenticated ? <Outlet /> : <Navigate to="/login" replace />;
+
+  if (!isAuthenticated) {
+    // Redirect to sign-in page if not authenticated
+    return <Navigate to='/signin' replace />;
+  }
+
+  return children;
 };
 
 export default ProtectedRoute;

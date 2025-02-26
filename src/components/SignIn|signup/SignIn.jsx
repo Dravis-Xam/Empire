@@ -1,4 +1,3 @@
-// src/components/SignIn|signup/SignIn.jsx
 import React, { useState, useEffect } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { X } from 'lucide-react';
@@ -8,23 +7,27 @@ import {
   signIn, 
   clearError 
 } from '../../features/auth/authSlice';
+import { useNavigate } from 'react-router-dom';
 import './SignIn.css';
 
 export default function SignInForm() {
+  const navigate = useNavigate();
   const dispatch = useDispatch();
-  const isSignInFormOpen = useSelector((state) => state.auth.isSignInFormOpen);
-  const error = useSelector((state) => state.auth.error);
+  const { isSignInFormOpen, error, isLoading } = useSelector((state) => state.auth);
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
+  const [showPassword, setShowPassword] = useState(false);
 
   useEffect(() => {
     if (error) {
-      const timer = setTimeout(() => {
-        dispatch(clearError());
-      }, 3000);
+      const timer = setTimeout(() => dispatch(clearError()), 3000);
       return () => clearTimeout(timer);
     }
   }, [error, dispatch]);
+
+  useEffect(() => {
+    return () => dispatch(closeSignInForm());
+  }, [dispatch]);
 
   const handleSubmit = (e) => {
     e.preventDefault();
@@ -33,6 +36,7 @@ export default function SignInForm() {
       .then(() => {
         setEmail('');
         setPassword('');
+        navigate('/')
       })
       .catch(() => {
         setEmail('');
@@ -45,7 +49,11 @@ export default function SignInForm() {
   return (
     <div className='sign-in-form-overlay'>
       <div className='sign-in-form'>
-        <button id='close-sign-in-btn' onClick={() => dispatch(closeSignInForm())}>
+        <button 
+          id='close-sign-in-btn' 
+          onClick={() => dispatch(closeSignInForm())}
+          aria-label="Close sign in form"
+        >
           <X />
         </button>
         <h2>Sign In</h2>
@@ -57,21 +65,33 @@ export default function SignInForm() {
               value={email}
               onChange={(e) => setEmail(e.target.value)}
               placeholder=' '
-              required
+              required 
+              autoComplete='email'
             />
             <label>Email</label>
           </div>
           <div className='input-container'>
             <input
-              type='password'
+              type={showPassword ? 'text' : 'password'}
               value={password}
               onChange={(e) => setPassword(e.target.value)}
               placeholder=' '
               required
+              autoComplete='current-password'
             />
             <label>Password</label>
+            <button
+              type='button'
+              onClick={() => setShowPassword(!showPassword)}
+              className='password-toggle'
+              aria-label={showPassword ? 'Hide password' : 'Show password'}
+            >
+              {showPassword ? 'Hide' : 'Show'}
+            </button>
           </div>
-          <button type='submit'>Sign In</button>
+          <button type='submit' disabled={isLoading}>
+            {isLoading ? 'Signing In...' : 'Sign In'}
+          </button>
         </form>
         <p>
           Don't have an account?{' '}
@@ -81,6 +101,7 @@ export default function SignInForm() {
               dispatch(openSignUpForm());
             }}
             className='sign-up-btn'
+            aria-label="Navigate to sign up"
           >
             Sign Up
           </button>

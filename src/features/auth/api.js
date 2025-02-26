@@ -1,17 +1,18 @@
-// src/features/auth/api.jsx
 import axios from 'axios';
 import store from '../../modules/store';
 import { logout } from './authSlice';
 
 const api = axios.create({
-  baseURL: process.env.REACT_APP_API_URL || 'http://localhost:5000',
+  baseURL: 'http://localhost:5000',
   headers: {
-    'Content-Type': 'application/json'
-  }
+    'Content-Type': 'application/json',
+  },
 });
 
+const getToken = () => store.getState().auth.token;
+
 api.interceptors.request.use((config) => {
-  const { token } = store.getState().auth;
+  const token = getToken();
   if (token) {
     config.headers.Authorization = `Bearer ${token}`;
   }
@@ -21,8 +22,15 @@ api.interceptors.request.use((config) => {
 api.interceptors.response.use(
   (response) => response,
   (error) => {
-    if (error.response?.status === 401) {
-      store.dispatch(logout());
+    if (error.response) {
+      if (error.response.status === 401) {
+        store.dispatch(logout());
+        window.location.href = '/login';
+      }
+    } else if (error.request) {
+      console.error('Network Error:', error.request);
+    } else {
+      console.error('Error:', error.message);
     }
     return Promise.reject(error);
   }

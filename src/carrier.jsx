@@ -5,8 +5,13 @@ import { Routes, Route } from 'react-router-dom';
 import { initializeAuth } from './features/auth/authSlice';
 import ProtectedRoute from './features/auth/ProtectedRoute';
 import SignInForm from './components/SignIn|signup/SignIn';
+import SignUpForm from './components/SignIn|signup/SignUp';
 import App from './App';
- 
+import Cart from './components/cart/Cart';
+import Payment from './components/payment/Payment';
+import Profile from './components/Profile/Profile';
+import AuthFormsContainer from './components/SignIn|signup/AuthFormsContainer';
+
 function Carrier() {
   const dispatch = useDispatch();
   const { loading } = useSelector((state) => state.auth);
@@ -19,11 +24,38 @@ function Carrier() {
 
   return (
     <Routes>
-      <Route path="/login" element={<SignInForm />} />
-      <Route element={<ProtectedRoute />}>
-        <Route path="/dashboard" element={<App />} />
+      <Route path='/' element={<App />}>
+        {/* Public Routes */}
+        <Route path='signin' element={<SignInForm />} />
+        <Route path='signup' element={<SignUpForm />} />
+        <Route path='cart' element={<Cart />} />
+        <Route path='/login' element={
+            <AuthFormsContainer />
+        } />
+        <Route path='/signup' element={
+          <ProtectedRoute>
+            <AuthFormsContainer/>
+          </ProtectedRoute>
+        } />
+  
+        {/* Protected Routes */}
+        <Route
+          path='profile'
+          element={
+            <ProtectedRoute>
+              <Profile />
+            </ProtectedRoute>
+          }
+        />
+        <Route
+          path='payment'
+          element={
+            <ProtectedRoute>
+              <Payment />
+            </ProtectedRoute>
+          }
+        />
       </Route>
-      <Route path="*" element={<Navigate to="/dashboard" replace />} />
     </Routes>
   );
 }

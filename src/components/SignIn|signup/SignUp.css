@@ -73,7 +73,7 @@
 .input-container:focus-within .label,
 .input:not(:placeholder-shown) + .label {
   top: -10px;
-  left: 10px;
+  left: -40px;
   font-size: 14px;
   font-weight: 600;
   color: #007bff; /* Blue label color when input is focused or filled */

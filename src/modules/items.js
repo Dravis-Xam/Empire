@@ -1,5 +1,5 @@
 //src/modules/items.jsx
-
+ 
 const items = [
     {
         name: "ZTE Nubic Red Magic Pro",
