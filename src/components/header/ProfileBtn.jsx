@@ -1,17 +1,20 @@
 import React, { useState } from 'react';
 import { useSelector, useDispatch } from 'react-redux';
+import { useNavigate } from 'react-router-dom';
 import images from './imagesUrls';
 import "./supButtons.css";
-import Profile from '../Profile/Profile'; // Import the Profile component
+import Profile from '../Profile/Profile';
 
 export default function ProfileBtn() {
   const [showProfile, setShowProfile] = useState(false);
   const isSignedIn = useSelector((state) => state.auth.isSignedIn);
   const dispatch = useDispatch();
+  const navigate = useNavigate();
 
   const handleProfileClick = () => {
     if (isSignedIn) {
       setShowProfile(!showProfile);
+      navigate('/profile');
     }
   };
 
@@ -24,7 +27,6 @@ export default function ProfileBtn() {
       {showProfile && isSignedIn && (
         <Profile 
           onClose={() => setShowProfile(false)}
-          // Add any additional props you need to pass to Profile component
         />
       )}
     </>

@@ -1,7 +1,7 @@
-
 import React, { useState, useEffect, useRef } from 'react';
 import './Cart.css';
 import { useSelector, useDispatch } from 'react-redux';
+import { useNavigate } from 'react-router-dom';
 import {
   removeItemFromCart,
   removeMultipleItemsFromCart,
@@ -13,6 +13,7 @@ import { X } from 'lucide-react';
 
 export default function Cart() {
   const dispatch = useDispatch();
+  const navigate = useNavigate();
   const isVisible = useSelector((state) => state.visibility.isVisible);
   const cartItems = useSelector((state) => state.cart.items);
   const [selectedItems, setSelectedItems] = useState([]);
@@ -56,6 +57,13 @@ export default function Cart() {
     setSelectedItems([]);
   };
 
+  // Calculate total price
+  const totalPrice = cartItems.reduce((total, item) => total + item.price * item.quantity, 0);
+
+  // Apply 10% discount if total price is above 5000
+  const discount = totalPrice > 5000 ? 10 : 0;
+  const discountedPrice = totalPrice * (1 - discount / 100);
+
   return (
     <>
       <section className="cart" ref={cartRef}>
@@ -85,7 +93,7 @@ export default function Cart() {
                 className="item-checkbox"
               />
               <span>{item.name}</span>
-              <span>${item.price}</span>
+              <span>${item.price.toFixed(2)}</span>
               <button
                 className="delete-item-btn"
                 onClick={() => dispatch(removeItemFromCart(item.id))}
@@ -96,8 +104,25 @@ export default function Cart() {
           ))}
         </div>
 
+        {/* Display total price and discount */}
+        <div className="cart-summary">
+          <p>Total Price: ${totalPrice.toFixed(2)}</p>
+          {discount > 0 && (
+            <p>
+              Discount ({discount}%): -${(totalPrice - discountedPrice).toFixed(2)}
+            </p>
+          )}
+          <p>Final Price: ${discountedPrice.toFixed(2)}</p>
+        </div>
+
         {cartItems.length > 0 && (
-          <button className="toPayment-btn" onClick={() => setShowPayment(true)}>
+          <button
+            className="toPayment-btn"
+            onClick={() => {
+              setShowPayment(true);
+              navigate('/payment', { state: { totalPrice, discount } });
+            }}
+          >
             Complete
           </button>
         )}
@@ -119,7 +144,17 @@ export default function Cart() {
       </section>
 
       {/* Render Payment component */}
-      {showPayment && <Payment onClose={() => setShowPayment(false)} />}
+      {showPayment && (
+        <Payment
+          cart={cartItems}
+          totalPrice={totalPrice}
+          discount={discount}
+          onClose={() => {
+            setShowPayment(false);
+            navigate('/');
+          }}
+        />
+      )}
     </>
   );
 }

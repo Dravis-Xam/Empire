@@ -11,6 +11,7 @@ import Cart from './components/cart/Cart';
 import Payment from './components/payment/Payment';
 import Profile from './components/Profile/Profile';
 import AuthFormsContainer from './components/SignIn|signup/AuthFormsContainer';
+import ErrorBoundary from './features/auth/ErrorBoundary.jsx';
 
 function Carrier() {
   const dispatch = useDispatch();
@@ -51,7 +52,9 @@ function Carrier() {
           path='payment'
           element={
             <ProtectedRoute>
-              <Payment />
+              <ErrorBoundary>
+                <Payment />
+              </ErrorBoundary>
             </ProtectedRoute>
           }
         />
