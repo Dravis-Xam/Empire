@@ -6,6 +6,8 @@ import AboutUs from './footer_components/AboutUs'
 import PnsSection from './footer_components/PnsSection';
 import titleBg from '../../../public/EHP-1.png';
 import HelpSc from './footer_components/help-sc';
+import JobsSc from './footer_components/JobsSc';
+import StarRatingComponent from './footer_components/StarRatingComponet'
 
 export default function Footer() {
   return (
@@ -20,9 +22,13 @@ export default function Footer() {
           <AboutUs />
           <PnsSection />
           <HelpSc />
+          <JobsSc />
         </div>
       </div>
-      <CommentForm />
+      <div className='mis-inputs'>
+        <CommentForm />
+        <StarRatingComponent />
+      </div>
     </section>
   )
 }

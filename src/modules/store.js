@@ -1,6 +1,7 @@
 import { configureStore, combineReducers } from '@reduxjs/toolkit';
 import { debounce } from 'lodash';
 
+
 const PERSISTENCE_DEBOUNCE = 1000;
 const PERSISTENCE_KEY = 'authState';
 
@@ -12,6 +13,8 @@ const rootReducer = combineReducers({
   auth: placeholderReducer,
   cart: placeholderReducer,
   visibility: placeholderReducer,
+  reviews: placeholderReducer,
+  user: placeholderReducer,
 });
 
 const loadPersistedState = () => {
@@ -51,11 +54,14 @@ store.loadReducers = async () => {
   const { default: authReducer } = await import('../features/auth/authSlice');
   const { default: cartReducer } = await import('../features/cart/cartSlice');
   const { default: visibilityReducer } = await import('../features/visibility/visibilitySlice');
-
+  const { default: reviewsReducer } = await import("../features/review/reviewSlice");
+  const { default: userReducer} = await import("../features/user/userSlice")
   // Inject the loaded reducers
   store.injectReducer('auth', authReducer);
   store.injectReducer('cart', cartReducer);
   store.injectReducer('visibility', visibilityReducer);
+  store.injectReducer('reviews', reviewsReducer);
+  store.injectReducer('user', userReducer);
 };
 
 // Load reducers asynchronously

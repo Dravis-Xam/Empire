@@ -19,12 +19,40 @@
     width: 100%;
 }
 
-.miscelinous-cn {
+.miscelinous-cn , .mis-inputs {
     display: flex;
     align-items: top;
     justify-content: space-evenly;
+    flex-wrap: wrap;
+    margin: 0 auto;
+    gap: 10px;
+    width: 100%;
+    position: relative;
+    left: 0;
+    right: 0;
 }
 
+.miscelinous-cn {
+    margin-bottom: 20px;
+}
+
+.mis-inputs {
+    gap: 0;
+}
+
+@media (max-width: 760px) {
+    body {
+        padding-top: 50px;
+    }
+    .mis-inputs {
+        gap: 10px;
+    }
+}
+
+
+.rating-title {
+    color: blue;
+}
 
 
 .title-container {

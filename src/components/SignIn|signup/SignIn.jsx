@@ -34,13 +34,13 @@ export default function SignInForm() {
     dispatch(signIn({ email, password }))
       .unwrap()
       .then(() => {
-        setEmail('');
-        setPassword('');
-        navigate('/')
+        setEmail("");
+        setPassword("");
+        navigate("/"); // Redirect to the home page
       })
       .catch(() => {
-        setEmail('');
-        setPassword('');
+        setEmail("");
+        setPassword("");
       });
   };
 
