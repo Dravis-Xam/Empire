@@ -82,7 +82,7 @@ export default function SignUpForm() {
             />
             <label>Password</label>
           </div>
-          <button type='submit'>Sign Up</button>
+          <button type='submit' className='submit-button'>Sign Up</button>
         </form>
         <p>
           Already have an account?{' '}

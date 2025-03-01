@@ -14,7 +14,6 @@ const rootReducer = combineReducers({
   cart: placeholderReducer,
   visibility: placeholderReducer,
   reviews: placeholderReducer,
-  user: placeholderReducer,
 });
 
 const loadPersistedState = () => {
@@ -55,13 +54,11 @@ store.loadReducers = async () => {
   const { default: cartReducer } = await import('../features/cart/cartSlice');
   const { default: visibilityReducer } = await import('../features/visibility/visibilitySlice');
   const { default: reviewsReducer } = await import("../features/review/reviewSlice");
-  const { default: userReducer} = await import("../features/user/userSlice")
   // Inject the loaded reducers
   store.injectReducer('auth', authReducer);
   store.injectReducer('cart', cartReducer);
   store.injectReducer('visibility', visibilityReducer);
   store.injectReducer('reviews', reviewsReducer);
-  store.injectReducer('user', userReducer);
 };
 
 // Load reducers asynchronously

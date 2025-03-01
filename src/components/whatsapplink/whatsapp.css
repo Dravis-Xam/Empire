@@ -1,0 +1,27 @@
+.whatsapp-chat-link {
+    position: absolute;
+    background-color: green;
+    right: 0;
+    top: 250vh;
+    height: 50px;
+    width: 50px;
+    display: flex;
+    border-top-left-radius: 30px;
+    border-bottom-left-radius: 30px;
+    align-items: center;
+    justify-content: center;
+}
+
+.whatsapp-chat-link a {
+    display: flex;
+    width: 100%;
+    height: 100%;
+    background-color: transparent;
+    align-items: center;
+    justify-content: center;
+}
+
+.whatsapp-link-img {
+    height: 40px;
+    width: 40px;
+}

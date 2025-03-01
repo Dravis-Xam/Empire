@@ -1,0 +1,58 @@
+.profile-panel {
+  position: fixed;
+  top: 50%; /* Center vertically */
+  right: 20px; /* Position from the right edge of the page */
+  transform: translateY(-50%); /* Adjust for vertical centering */
+  padding: 20px;
+  background: white;
+  border-radius: 10px;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+  text-align: center;
+  width: 300px;
+  z-index: 1000; /* Ensure it appears above other content */
+}
+
+.close-btn {
+  position: absolute;
+  top: 10px;
+  right: 10px;
+  background: none;
+  border: none;
+  cursor: pointer;
+}
+
+.see-acc-btn {
+  margin-top: 20px;
+  padding: 10px 20px;
+  background-color: #007bff;
+  color: white;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+}
+
+.log-out-btn {
+  margin-top: 10px;
+  background: none;
+  border: none;
+  cursor: pointer;
+}
+
+.log-out-btn img {
+  width: 24px;
+  height: 24px;
+}
+
+.sign-in-btn {
+  margin-top: 20px;
+  padding: 10px 20px;
+  background-color: #28a745;
+  color: white;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+}
+
+.sign-in-btn:hover {
+  background-color: #218838;
+}

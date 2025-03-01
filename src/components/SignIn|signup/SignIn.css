@@ -64,7 +64,7 @@
 
   .input-container input:focus + label,
   .input-container input:not(:placeholder-shown) + label {
-    left: -58px;    
+    left: -64px;    
     font-weight: 600; 
   }
   

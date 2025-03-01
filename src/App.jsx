@@ -8,6 +8,7 @@ import Item from './components/item/Item';
 import items from './modules/items.js';
 import Cart from './components/cart/Cart.jsx'
 import { Outlet } from 'react-router-dom';
+import WhatsappChat from './components/whatsapplink/WhatsappChat.jsx';
 
 function App() {
   const isCartVisible = useSelector((state) => state.visibility.isVisible);
@@ -27,6 +28,7 @@ function App() {
         }
        <Outlet /> {/* Render nested routes here */}
       </section>
+      <WhatsappChat />
       <Footer />
     </>
   );

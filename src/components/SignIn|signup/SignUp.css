@@ -15,10 +15,12 @@
   background-color: rgba(0, 255, 255, 0.925); /* Semi-transparent cyan background */
   width: 90%;
   max-width: 500px; /* Limit maximum width for better readability */
+  min-width: 250px;
   padding: 30px;
   position: relative;
   border-radius: 10px;
   display: flex;
+  flex-wrap: wrap;
   flex-direction: column;
   align-items: center;
   gap: 20px; /* Consistent spacing between elements */
@@ -73,7 +75,7 @@
 .input-container:focus-within .label,
 .input:not(:placeholder-shown) + .label {
   top: -10px;
-  left: -40px;
+  left: -64px;
   font-size: 14px;
   font-weight: 600;
   color: #007bff; /* Blue label color when input is focused or filled */
@@ -88,18 +90,22 @@
   font-weight: 600;
   color: white;
   background-color: rgba(162, 0, 255, 0.7); /* Semi-transparent purple */
-  padding: 12px 24px;
+  padding: 8px 14px;
   border: none;
   border-radius: 40px;
   cursor: pointer;
   transition: all 0.3s ease-in-out;
-  width: 100%; /* Full width for better mobile responsiveness */
+  margin: 0 auto;
+  width: 60%; /* Full width for better mobile responsiveness */
   max-width: 200px; /* Limit maximum width */
   text-align: center;
+  left: 50%;
+  transform: translateX(40%);
 }
 
 .submit-button:hover {
-  transform: scale(1.05); /* Slight scale-up on hover */
+  left: 50%;
+  transform: translateX(30%); /* Slight scale-up on hover */
   background-color: rgba(162, 0, 255, 0.9); /* Less transparency on hover */
 }
 
