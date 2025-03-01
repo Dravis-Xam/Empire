@@ -1,7 +1,6 @@
-// carrier.jsx
 import { useEffect } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
-import { Routes, Route } from 'react-router-dom';
+import { Routes, Route, useNavigate } from 'react-router-dom';
 import { initializeAuth } from './features/auth/authSlice';
 import ProtectedRoute from './features/auth/ProtectedRoute';
 import SignInForm from './components/SignIn|signup/SignIn';
@@ -15,7 +14,12 @@ import ErrorBoundary from './features/auth/ErrorBoundary.jsx';
 
 function Carrier() {
   const dispatch = useDispatch();
+  const navigate = useNavigate();
   const { loading } = useSelector((state) => state.auth);
+  const cartItems = useSelector((state) => state.cart.items); // Get cart items from Redux store
+  const totalPrice = useSelector((state) => state.cart.totalPrice); // Get total price from Redux store
+  const discountedPrice = useSelector((state) => state.cart.discountedPrice); // Get discounted price from Redux store
+  const discount = useSelector((state) => state.cart.discount); // Get discount from Redux store
 
   useEffect(() => {
     dispatch(initializeAuth());
@@ -30,15 +34,9 @@ function Carrier() {
         <Route path='signin' element={<SignInForm />} />
         <Route path='signup' element={<SignUpForm />} />
         <Route path='cart' element={<Cart />} />
-        <Route path='/login' element={
-            <AuthFormsContainer />
-        } />
-        <Route path='/signup' element={
-          <ProtectedRoute>
-            <AuthFormsContainer/>
-          </ProtectedRoute>
-        } />
-  
+        <Route path='/login' element={<AuthFormsContainer />} />
+        <Route path='/signup' element={<AuthFormsContainer />} />
+
         {/* Protected Routes */}
         <Route
           path='profile'
@@ -53,7 +51,13 @@ function Carrier() {
           element={
             <ProtectedRoute>
               <ErrorBoundary>
-                <Payment />
+                <Payment
+                  cart={cartItems}
+                  totalPrice={totalPrice}
+                  discountedPrice={discountedPrice}
+                  discount={discount}
+                  onClose={() => navigate('/')} // Navigate to home on close
+                />
               </ErrorBoundary>
             </ProtectedRoute>
           }

@@ -60,8 +60,8 @@ export default function Cart() {
   // Calculate total price
   const totalPrice = cartItems.reduce((total, item) => {
     const price = parseFloat(item.price);
-    const quantity = parseInt(item.quantity, 10);
-    return total + (isNaN(price) ? 0 : price) * (isNaN(quantity) ? 0 : quantity);
+    const quantity = parseInt(item.quantity, 10) || 1; // Default to 1 if quantity is invalid
+    return total + (isNaN(price) ? 0 : price) * quantity;
   }, 0);
 
   // Apply 10% discount if total price is above 5000
@@ -70,6 +70,10 @@ export default function Cart() {
 
   return (
     <>
+      {/* Overlay */}
+      <div className="cart-overlay" onClick={() => dispatch(toggleVisibility())} />
+
+      {/* Cart Container */}
       <section className="cart" ref={cartRef}>
         <div className="cart-header">
           <h2>Cart</h2>
@@ -81,12 +85,14 @@ export default function Cart() {
             <X />
           </button>
         </div>
+
         <div className="info-cart">
           {selectedItems.length > 0
             ? `Selected ${selectedItems.length} of ${cartItems.length} items`
             : `You have ${cartItems.length} items in your cart`}
         </div>
 
+        {/* Cart Items */}
         <div className="cart-items">
           {cartItems.map((item) => (
             <div key={item.id} className="cart-item">
@@ -108,7 +114,7 @@ export default function Cart() {
           ))}
         </div>
 
-        {/* Display total price and discount */}
+        {/* Cart Summary */}
         <div className="cart-summary">
           <p>Total Price: ${totalPrice.toFixed(2)}</p>
           {discount > 0 && (
@@ -119,6 +125,7 @@ export default function Cart() {
           <p>Final Price: ${discountedPrice.toFixed(2)}</p>
         </div>
 
+        {/* Complete Button */}
         {cartItems.length > 0 && (
           <button
             className="toPayment-btn"
@@ -131,6 +138,7 @@ export default function Cart() {
           </button>
         )}
 
+        {/* Bulk Actions */}
         {cartItems.length > 0 && (
           <div className="bulk-actions">
             <button
@@ -152,6 +160,7 @@ export default function Cart() {
         <Payment
           cart={cartItems}
           totalPrice={totalPrice}
+          discountedPrice={discountedPrice} // Pass discountedPrice instead of totalPrice
           discount={discount}
           onClose={() => {
             setShowPayment(false);

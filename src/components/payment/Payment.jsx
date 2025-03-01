@@ -2,7 +2,10 @@ import React, { useState, useEffect } from 'react';
 import './payment.css';
 import { ChevronDown, X } from 'lucide-react';
 
-export default function Payment({ onClose, cart }) {
+export default function Payment({
+  onClose,
+  cart = { items: [], discount: 0 }, // Default parameters
+}) {
   const [expandedMethod, setExpandedMethod] = useState(null);
   const [paymentDetails, setPaymentDetails] = useState({
     bankCard: { cardNumber: '', expiryDate: '', cvv: '' },
@@ -14,10 +17,11 @@ export default function Payment({ onClose, cart }) {
   const [exchangeRates, setExchangeRates] = useState({});
   const [currencySearch, setCurrencySearch] = useState('');
   const [suggestedCurrencies, setSuggestedCurrencies] = useState([]);
+  const [convertedPrice, setConvertedPrice] = useState(null); // State for converted price
 
   // Extract cart items and discount from the cart prop
-  const cartItems = cart?.items || [];
-  const cartDiscount = cart?.discount || 0;
+  const cartItems = cart.items;
+  const cartDiscount = cart.discount;
 
   // Calculate total price and discounted price
   const totalPriceUSD = cartItems.reduce((total, item) => total + item.price * item.quantity, 0);
@@ -53,8 +57,13 @@ export default function Payment({ onClose, cart }) {
   }, [currencySearch, exchangeRates]);
 
   // Convert price to selected currency
-  const convertPrice = (price) => {
-    return (price * exchangeRates[currency]).toFixed(2);
+  const handleConvertPrice = () => {
+    if (convertedPrice === null) {
+      const converted = (discountedPrice * exchangeRates[currency]).toFixed(2);
+      setConvertedPrice(converted);
+    } else {
+      setConvertedPrice(null); // Reset converted price
+    }
   };
 
   const toggleMethod = (method) => {
@@ -91,7 +100,10 @@ export default function Payment({ onClose, cart }) {
           <p>Number of Items: {cartItems.length}</p>
           <p>Total Price (USD): ${totalPriceUSD.toFixed(2)}</p>
           {cartDiscount > 0 && <p>Discount: {cartDiscount}%</p>}
-          <p>Discounted Price (USD): ${discountedPrice.toFixed(2)}</p>
+          <p>
+            Discounted Price (USD): $
+            {convertedPrice === null ? discountedPrice.toFixed(2) : convertedPrice}
+          </p>
 
           {/* Currency Conversion */}
           <div className="currency-converter">
@@ -112,7 +124,9 @@ export default function Payment({ onClose, cart }) {
                 ))}
               </ul>
             )}
-            <p>Converted Price ({currency}): {convertPrice(discountedPrice)}</p>
+            <button onClick={handleConvertPrice}>
+              {convertedPrice === null ? 'Convert' : 'Reset'}
+            </button>
           </div>
         </div>
 
@@ -200,10 +214,3 @@ export default function Payment({ onClose, cart }) {
     </div>
   );
 }
-
-Payment.defaultProps = {
-  cart: {
-    items: [],
-    discount: 0,
-  },
-};

@@ -37,6 +37,7 @@ Item.propTypes = {
             ram: PropTypes.string.isRequired,
             i_storage: PropTypes.string.isRequired,
             i_resolution: PropTypes.string.isRequired,
+            image: PropTypes.string.isRequired,
         }).isRequired,
     }).isRequired,
 };
