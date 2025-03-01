@@ -1,0 +1,35 @@
+.comment-section {
+    position: relative;
+    display: flex;
+    align-items: center;
+    flex-direction: column;
+    width: 500px;
+    min-width: 200px;
+    text-align: center;
+}
+
+.comment-title {
+    font-size: 20px;
+    font-weight: 800px;
+    width: 80%;
+}
+
+.comment-form {
+    display: flex;
+    align-items: center;
+    flex-direction: column;
+    width: 80%;
+}
+
+.comment-form > div {
+    width: 80%;
+}
+
+.comment-form input {
+    width: 150px;
+    padding: 5px;
+    display: grid;
+    margin: none;
+    grid-template-columns: 1fr 2fr;
+    height: fit-content;
+}

@@ -1,10 +1,11 @@
 import React from 'react'
+import './Comment.css'
 
 export default function CommentForm() {
   return (
     <div className='comment-section'>
-        <span>Write to us</span>
-        <form method="POST" action='#'>
+        <span className='comment-title'>Write to us</span>
+        <form method="POST" action='#' className='comment-form'>
             <div>
                 <label>Email</label>
                 <input

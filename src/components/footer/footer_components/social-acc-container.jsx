@@ -1,6 +1,6 @@
 import React from 'react';
 import './sca.css';
-
+ 
 export default function SocialAccContainer() {
   return (
     <div className='social-acc-container'>

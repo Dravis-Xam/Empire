@@ -1,4 +1,5 @@
 import React from 'react'
+import './Pns.css'
 
 export default function PnsSection() {
   return (
