@@ -63,6 +63,7 @@ export default function Payment() {
       setConvertedPrice(converted);
     } else {
       setConvertedPrice(null);
+      setCurrency('USD');
     }
   };
 
@@ -105,7 +106,7 @@ export default function Payment() {
           <p>Total Price (USD): {totalPrice?.toFixed(2)}</p>
           {discount > 0 && <p>Discount: {discount}%</p>}
           <p>
-            Discounted Price ({currency}): $
+            Discounted Price ({currency}): 
             {convertedPrice === null ? discountedPrice.toFixed(2) : convertedPrice}
           </p>
 
@@ -129,7 +130,7 @@ export default function Payment() {
               </ul>
             )}
             <button onClick={handleConvertPrice} className='convert-curr-btn'>
-              {convertedPrice === null ? 'Convert' : 'Reset'}
+              {convertedPrice === null ? 'Convert' : 'Reset' }
             </button>
           </div>
         </div>

@@ -7,7 +7,7 @@
     font-family: Montserrat;
     background-color: #f9f9f9;
     box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
-    width: 400px; /* Adjust width as needed */
+    width: 250px; 
     padding-bottom: 80px;
     transition: all .3s ease-in-out;
 }

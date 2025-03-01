@@ -200,19 +200,15 @@ export default function Cart() {
           <p>Final Price: ${discountedPrice.toFixed(2)}</p>
         </div>
 
-        {/* Complete Button */}
-        {cartItems.length > 0 && (
-          <button
-            className="toPayment-btn"
-            onClick={handleCompletePurchase}
-          >
-            Complete
-          </button>
-        )}
-
         {/* Bulk Actions */}
         {cartItems.length > 0 && (
           <div className="bulk-actions">
+            <button
+              className="toPayment-btn"
+              onClick={handleCompletePurchase}
+            >
+              Complete
+            </button>
             <button
               className="delete-btn"
               onClick={deleteSelected}
