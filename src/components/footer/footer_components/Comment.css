@@ -9,9 +9,10 @@
 }
 
 .comment-title {
-    font-size: 20px;
+    font-size: 23px;
     font-weight: 800px;
     width: 80%;
+    margin-bottom: 20px;
 }
 
 .comment-form {
@@ -19,17 +20,31 @@
     align-items: center;
     flex-direction: column;
     width: 80%;
+    gap: 10px;
 }
 
 .comment-form > div {
     width: 80%;
 }
 
-.comment-form input {
-    width: 150px;
-    padding: 5px;
-    display: grid;
-    margin: none;
-    grid-template-columns: 1fr 2fr;
-    height: fit-content;
+.comment-form input, textarea {
+    width: 100%; 
+    padding: 8px; 
+    border: 1px solid #ccc; 
+    border-radius: 4px;
+    box-sizing: border-box;
+    font-family: inherit;
+    font-size: inherit;
+}
+
+.submit-comment-btn {
+    position: relative;
+    margin : 0 auto;
+    background-color: rgba(9, 25, 193, 0.84);
+    color: white;
+    font-size: 18px;
+    font-weight: 700;
+    padding: 10px;
+    border-radius: 50px;
+    width: 40%;
 }

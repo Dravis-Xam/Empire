@@ -81,7 +81,7 @@
     outline: none;
   }
 
-  button[type='submit'] {
+  .submit-signin-btn {
     width: 100px;
     padding: 10px;
     background: #007bff;
@@ -92,10 +92,10 @@
     font-family: Montserrat;
     position: relative;
     margin: 0 auto;
-    left: 36%;
+    left: 36%; 
   }
   
-  button[type='submit']:hover {
+  .submit-signin-btn:hover {
     background: #0056b3;
     scale: 1.11;
     box-shadow: 0 5px 10px rgba(0, 0, 0, 0.5),

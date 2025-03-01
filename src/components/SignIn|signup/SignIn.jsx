@@ -89,7 +89,9 @@ export default function SignInForm() {
               {showPassword ? 'Hide' : 'Show'}
             </button>
           </div>
-          <button type='submit' disabled={isLoading}>
+          <button type='submit'  
+          className = 'submit-signin-btn'
+          disabled={isLoading}>
             {isLoading ? 'Signing In...' : 'Sign In'}
           </button>
         </form>

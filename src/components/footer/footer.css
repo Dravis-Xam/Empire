@@ -1,7 +1,9 @@
+@import url('https://fonts.googleapis.com/css2?family=Dosis:wght@200..800&family=Noto+Sans:ital,wght@0,100..900;1,100..900&display=swap');
+
 .footer {
     position: relative;
     bottom: 0;
-    background-color: rgba(160, 106, 7, 0.795);
+    background-color: rgba(255, 166, 0, 0.795);
     color: white;
     font-family: Montserrat;
     left: 0; 
@@ -9,4 +11,56 @@
     margin-top: 60px;
     padding: 20px;
     padding-top: 150px;
+}
+
+.bare-foot-container {
+    position: relative;
+    height: fit-content;
+    width: 100%;
+}
+
+.miscelinous-cn {
+    display: flex;
+    align-items: top;
+    justify-content: space-evenly;
+}
+
+
+
+.title-container {
+    position: relative;
+    width: 100%;
+    height: 50%;
+}
+
+.title-bg {
+    width: 400px;
+    height: 320px;
+    position: absolute;
+    left: 50%;
+    transform: translateX(-50%);
+    top: 0;
+}
+
+.page-title-section {
+    text-align: center;
+    font-size: 36px;
+    top: 10px;
+    font-weight: 800;
+    font-family: Noto Sans, Montserrat;
+    letter-spacing: 2px;
+    background: linear-gradient(90deg, rgb(0, 255, 0), rgb(0, 255, 234), rgb(0, 72, 255));
+    -webkit-background-clip: text;
+    background-clip: text;
+    color: transparent;
+    animation: animate-colors glow-animation 5s linear infinite;
+}
+
+@keyframes animate-colors {
+    0% {
+      filter: hue-rotate(0deg);
+    }
+    100% {
+      filter: hue-rotate(360deg);
+    }
 }

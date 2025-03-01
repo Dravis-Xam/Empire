@@ -4,7 +4,7 @@ import './Comment.css'
 export default function CommentForm() {
   return (
     <div className='comment-section'>
-        <span className='comment-title'>Write to us</span>
+        <h2 className='comment-title'>Write to us</h2>
         <form method="POST" action='#' className='comment-form'>
             <div>
                 <label>Email</label>
@@ -24,7 +24,6 @@ export default function CommentForm() {
                     required
                 />
             </div>
-            <br ></br>
             <button type='submit' className='submit-comment-btn'> Send </button>
         </form>
     </div>
