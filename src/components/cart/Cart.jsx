@@ -58,7 +58,11 @@ export default function Cart() {
   };
 
   // Calculate total price
-  const totalPrice = cartItems.reduce((total, item) => total + item.price * item.quantity, 0);
+  const totalPrice = cartItems.reduce((total, item) => {
+    const price = parseFloat(item.price);
+    const quantity = parseInt(item.quantity, 10);
+    return total + (isNaN(price) ? 0 : price) * (isNaN(quantity) ? 0 : quantity);
+  }, 0);
 
   // Apply 10% discount if total price is above 5000
   const discount = totalPrice > 5000 ? 10 : 0;
@@ -93,7 +97,7 @@ export default function Cart() {
                 className="item-checkbox"
               />
               <span>{item.name}</span>
-              <span>${item.price.toFixed(2)}</span>
+              <span>${parseFloat(item.price).toFixed(2)}</span>
               <button
                 className="delete-item-btn"
                 onClick={() => dispatch(removeItemFromCart(item.id))}
