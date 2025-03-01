@@ -4,33 +4,14 @@ import { debounce } from 'lodash';
 const PERSISTENCE_DEBOUNCE = 1000;
 const PERSISTENCE_KEY = 'authState';
 
-// Static reducers (initially empty)
-// Example static reducers
-const staticReducers = {
-  // Example: A placeholder reducer for the `auth` slice
-  auth: (state = {}, action) => {
-    switch (action.type) {
-      case 'SET_AUTH':
-        return { ...state, ...action.payload };
-      default:
-        return state;
-    }
-  },
-  
-  // Example: A placeholder reducer for the `visibility` slice
-  visibility: (state = { isVisible: false }, action) => {
-    switch (action.type) {
-      case 'TOGGLE_VISIBILITY':
-        return { ...state, isVisible: !state.isVisible };
-      default:
-        return state;
-    }
-  },
-};
+// Placeholder reducer for slices that are not yet loaded
+const placeholderReducer = (state = {}, action) => state;
 
-const createRootReducer = (asyncReducers = {}) => combineReducers({
-  ...staticReducers,
-  ...asyncReducers,
+// Combine reducers with placeholders
+const rootReducer = combineReducers({
+  auth: placeholderReducer,
+  cart: placeholderReducer,
+  visibility: placeholderReducer,
 });
 
 const loadPersistedState = () => {
@@ -44,7 +25,7 @@ const loadPersistedState = () => {
 };
 
 const store = configureStore({
-  reducer: createRootReducer(),
+  reducer: rootReducer, // Use the combined reducer with placeholders
   preloadedState: loadPersistedState(),
   middleware: (getDefaultMiddleware) =>
     getDefaultMiddleware({
@@ -54,25 +35,30 @@ const store = configureStore({
     }),
 });
 
+// Function to dynamically inject reducers
 store.injectReducer = (key, asyncReducer) => {
   store.asyncReducers = { ...store.asyncReducers, [key]: asyncReducer };
-  store.replaceReducer(createRootReducer(store.asyncReducers));
+  store.replaceReducer(
+    combineReducers({
+      ...rootReducer,
+      ...store.asyncReducers,
+    })
+  );
 };
 
+// Function to load reducers asynchronously
 store.loadReducers = async () => {
   const { default: authReducer } = await import('../features/auth/authSlice');
   const { default: cartReducer } = await import('../features/cart/cartSlice');
   const { default: visibilityReducer } = await import('../features/visibility/visibilitySlice');
 
-  store.replaceReducer(
-    createRootReducer({
-      auth: authReducer,
-      cart: cartReducer,
-      visibility: visibilityReducer,
-    })
-  );
+  // Inject the loaded reducers
+  store.injectReducer('auth', authReducer);
+  store.injectReducer('cart', cartReducer);
+  store.injectReducer('visibility', visibilityReducer);
 };
 
+// Load reducers asynchronously
 store.loadReducers();
 
 const saveState = debounce(() => {

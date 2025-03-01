@@ -1,4 +1,4 @@
-import React, { useState, useEffect, useRef } from 'react';
+import React, { useState, useEffect, useRef, useCallback } from 'react';
 import './Cart.css';
 import { useSelector, useDispatch } from 'react-redux';
 import { useNavigate } from 'react-router-dom';
@@ -8,7 +8,6 @@ import {
   clearCart,
 } from '../../features/cart/cartSlice';
 import { toggleVisibility } from '../../features/visibility/visibilitySlice';
-import Payment from '../payment/Payment'; // Import Payment component
 import { X } from 'lucide-react';
 
 export default function Cart() {
@@ -17,10 +16,10 @@ export default function Cart() {
   const isVisible = useSelector((state) => state.visibility.isVisible);
   const cartItems = useSelector((state) => state.cart.items);
   const [selectedItems, setSelectedItems] = useState([]);
-  const [showPayment, setShowPayment] = useState(false); // State for Payment component
 
   const cartRef = useRef(null);
 
+  // Handle click outside the cart
   useEffect(() => {
     const handleClickOutside = (event) => {
       if (cartRef.current && !cartRef.current.contains(event.target)) {
@@ -37,25 +36,95 @@ export default function Cart() {
     };
   }, [isVisible, dispatch]);
 
+  // Handle drag-and-drop functionality
+  useEffect(() => {
+    const cart = cartRef.current;
+    if (!cart) return; // Ensure cartRef is valid
+
+    const header = cart.querySelector('.cart-header');
+    if (!header) return; // Ensure header is valid
+
+    let isDragging = false;
+    let offsetX, offsetY;
+
+    const handleMouseDown = (e) => {
+      isDragging = true;
+      offsetX = e.clientX - cart.getBoundingClientRect().left;
+      offsetY = e.clientY - cart.getBoundingClientRect().top;
+      cart.style.cursor = 'grabbing';
+    };
+
+    const handleTouchStart = (e) => {
+      isDragging = true;
+      offsetX = e.touches[0].clientX - cart.getBoundingClientRect().left;
+      offsetY = e.touches[0].clientY - cart.getBoundingClientRect().top;
+      cart.style.cursor = 'grabbing';
+    };
+
+    const handleMouseMove = (e) => {
+      if (isDragging) {
+        const x = e.clientX - offsetX;
+        const y = e.clientY - offsetY;
+        cart.style.left = `${x}px`;
+        cart.style.top = `${y}px`;
+      }
+    };
+
+    const handleTouchMove = (e) => {
+      if (isDragging) {
+        const x = e.touches[0].clientX - offsetX;
+        const y = e.touches[0].clientY - offsetY;
+        cart.style.left = `${x}px`;
+        cart.style.top = `${y}px`;
+      }
+    };
+
+    const handleMouseUp = () => {
+      isDragging = false;
+      cart.style.cursor = 'grab';
+    };
+
+    const handleTouchEnd = () => {
+      isDragging = false;
+      cart.style.cursor = 'grab';
+    };
+
+    header.addEventListener('mousedown', handleMouseDown);
+    header.addEventListener('touchstart', handleTouchStart, { passive: true });
+    window.addEventListener('mousemove', handleMouseMove);
+    window.addEventListener('touchmove', handleTouchMove, { passive: true });
+    window.addEventListener('mouseup', handleMouseUp);
+    window.addEventListener('touchend', handleTouchEnd);
+
+    return () => {
+      header.removeEventListener('mousedown', handleMouseDown);
+      header.removeEventListener('touchstart', handleTouchStart);
+      window.removeEventListener('mousemove', handleMouseMove);
+      window.removeEventListener('touchmove', handleTouchMove);
+      window.removeEventListener('mouseup', handleMouseUp);
+      window.removeEventListener('touchend', handleTouchEnd);
+    };
+  }, []);
+
   if (!isVisible) return null;
 
-  const toggleSelection = (itemId) => {
+  const toggleSelection = useCallback((itemId) => {
     setSelectedItems((prev) =>
       prev.includes(itemId)
         ? prev.filter((id) => id !== itemId)
         : [...prev, itemId]
     );
-  };
+  }, []);
 
-  const deleteSelected = () => {
+  const deleteSelected = useCallback(() => {
     dispatch(removeMultipleItemsFromCart(selectedItems));
     setSelectedItems([]);
-  };
+  }, [dispatch, selectedItems]);
 
-  const deleteAll = () => {
+  const deleteAll = useCallback(() => {
     dispatch(clearCart());
     setSelectedItems([]);
-  };
+  }, [dispatch]);
 
   // Calculate total price
   const totalPrice = cartItems.reduce((total, item) => {
@@ -67,6 +136,12 @@ export default function Cart() {
   // Apply 10% discount if total price is above 5000
   const discount = totalPrice > 5000 ? 10 : 0;
   const discountedPrice = totalPrice * (1 - discount / 100);
+
+  // Handle opening payment and closing cart
+  const handleCompletePurchase = () => {
+    dispatch(toggleVisibility()); // Close the cart
+    navigate('/payment', { state: { cartItems, totalPrice, discount, discountedPrice } }); // Navigate to Payment with cart data
+  };
 
   return (
     <>
@@ -129,10 +204,7 @@ export default function Cart() {
         {cartItems.length > 0 && (
           <button
             className="toPayment-btn"
-            onClick={() => {
-              setShowPayment(true);
-              navigate('/payment', { state: { totalPrice, discount } });
-            }}
+            onClick={handleCompletePurchase}
           >
             Complete
           </button>
@@ -154,20 +226,6 @@ export default function Cart() {
           </div>
         )}
       </section>
-
-      {/* Render Payment component */}
-      {showPayment && (
-        <Payment
-          cart={cartItems}
-          totalPrice={totalPrice}
-          discountedPrice={discountedPrice} // Pass discountedPrice instead of totalPrice
-          discount={discount}
-          onClose={() => {
-            setShowPayment(false);
-            navigate('/');
-          }}
-        />
-      )}
     </>
   );
 }

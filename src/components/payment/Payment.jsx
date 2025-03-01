@@ -1,11 +1,19 @@
 import React, { useState, useEffect } from 'react';
 import './payment.css';
 import { ChevronDown, X } from 'lucide-react';
+import { useLocation, useNavigate } from 'react-router-dom';
 
-export default function Payment({
-  onClose,
-  cart = { items: [], discount: 0 }, // Default parameters
-}) {
+export default function Payment() {
+
+  const location = useLocation();
+  const navigate = useNavigate();
+  const { cartItems, totalPrice, discount, discountedPrice } = location.state || {
+    cartItems: [],
+    totalPrice: 0,
+    discount: 0,
+    discountedPrice: 0,
+  };
+
   const [expandedMethod, setExpandedMethod] = useState(null);
   const [paymentDetails, setPaymentDetails] = useState({
     bankCard: { cardNumber: '', expiryDate: '', cvv: '' },
@@ -13,30 +21,22 @@ export default function Payment({
     payless: { voucherCode: '' },
     paypal: { email: '', password: '' },
   });
-  const [currency, setCurrency] = useState('USD'); // Default currency
+  const [currency, setCurrency] = useState('USD');
   const [exchangeRates, setExchangeRates] = useState({});
   const [currencySearch, setCurrencySearch] = useState('');
   const [suggestedCurrencies, setSuggestedCurrencies] = useState([]);
-  const [convertedPrice, setConvertedPrice] = useState(null); // State for converted price
-
-  // Extract cart items and discount from the cart prop
-  const cartItems = cart.items;
-  const cartDiscount = cart.discount;
-
-  // Calculate total price and discounted price
-  const totalPriceUSD = cartItems.reduce((total, item) => total + item.price * item.quantity, 0);
-  const discountedPrice = totalPriceUSD * (1 - cartDiscount / 100);
+  const [convertedPrice, setConvertedPrice] = useState(null);
 
   // Fetch exchange rates from FastForex API
   useEffect(() => {
     const fetchExchangeRates = async () => {
       try {
-        const apiKey = import.meta.env.VITE_CURRENCY_CONVERTER_API; // Access environment variable
+        const apiKey = import.meta.env.VITE_CURRENCY_CONVERTER_API;
         const response = await fetch(
           `https://api.fastforex.io/fetch-all?api_key=${apiKey}`
         );
         const data = await response.json();
-        setExchangeRates(data.results); // FastForex returns rates in `results` object
+        setExchangeRates(data.results);
       } catch (error) {
         console.error('Failed to fetch exchange rates:', error);
       }
@@ -44,7 +44,7 @@ export default function Payment({
     fetchExchangeRates();
   }, []);
 
-  // Handle currency search and suggestions
+  // Handle currency search 
   useEffect(() => {
     if (currencySearch) {
       const filteredCurrencies = Object.keys(exchangeRates).filter((curr) =>
@@ -62,7 +62,7 @@ export default function Payment({
       const converted = (discountedPrice * exchangeRates[currency]).toFixed(2);
       setConvertedPrice(converted);
     } else {
-      setConvertedPrice(null); // Reset converted price
+      setConvertedPrice(null);
     }
   };
 
@@ -86,10 +86,14 @@ export default function Payment({
     onClose();
   };
 
+
   return (
-    <div className='payment-container-overlay'>
-      <section className='payment-container'>
-        <button className="close-btn" onClick={onClose}>
+    <div className='payment-container-overlay' onClick={() => navigate('/')}>
+      <section
+        className='payment-container'
+        onClick={(e) => e.stopPropagation()}
+      >
+        <button className="close-btn" onClick={() => navigate('/')}>
           <X size={24} />
         </button>
         <h1>Payment Methods</h1>
@@ -97,11 +101,11 @@ export default function Payment({
         {/* Cart Summary */}
         <div className="cart-summary">
           <h3>Cart Summary</h3>
-          <p>Number of Items: {cartItems.length}</p>
-          <p>Total Price (USD): ${totalPriceUSD.toFixed(2)}</p>
-          {cartDiscount > 0 && <p>Discount: {cartDiscount}%</p>}
+          <p>Number of Items: {cartItems?.length}</p>
+          <p>Total Price (USD): {totalPrice?.toFixed(2)}</p>
+          {discount > 0 && <p>Discount: {discount}%</p>}
           <p>
-            Discounted Price (USD): $
+            Discounted Price ({currency}): $
             {convertedPrice === null ? discountedPrice.toFixed(2) : convertedPrice}
           </p>
 
@@ -124,7 +128,7 @@ export default function Payment({
                 ))}
               </ul>
             )}
-            <button onClick={handleConvertPrice}>
+            <button onClick={handleConvertPrice} className='convert-curr-btn'>
               {convertedPrice === null ? 'Convert' : 'Reset'}
             </button>
           </div>
@@ -209,7 +213,9 @@ export default function Payment({
         <button 
           className='complete_purchase'
           onClick={handlePayment}
-        >Complete Purchase</button>  
+        >
+          Complete Purchase
+        </button>  
       </section>
     </div>
   );

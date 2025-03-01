@@ -39,6 +39,22 @@ export const signUp = createAsyncThunk(
   }
 );
 
+// Async Thunk for Initializing Auth
+export const initializeAuth = createAsyncThunk(
+  'auth/initializeAuth',
+  async (_, { rejectWithValue }) => {
+    try {
+      const token = localStorage.getItem('authToken');
+      if (token) {
+        return token; // Return the token if it exists
+      }
+      return rejectWithValue('No token found'); // Reject if no token is found
+    } catch (error) {
+      return rejectWithValue('Failed to initialize auth');
+    }
+  }
+);
+
 const authSlice = createSlice({
   name: 'auth',
   initialState,
@@ -53,7 +69,7 @@ const authSlice = createSlice({
       state.isSignUpFormOpen = true;
       state.isSignInFormOpen = false;
     },
-    closeSignUpForm: (state) => { // Fixed casing
+    closeSignUpForm: (state) => {
       state.isSignUpFormOpen = false;
     },
     signOut: (state) => {
@@ -61,19 +77,13 @@ const authSlice = createSlice({
       state.isAuthenticated = false;
       localStorage.removeItem('authToken');
     },
-    initializeAuth: (state) => {
-      const token = localStorage.getItem('authToken');
-      if (token) {
-        state.token = token;
-        state.isAuthenticated = true;
-      }
-    },
     clearError: (state) => {
       state.error = null;
-    }
+    },
   },
   extraReducers: (builder) => {
     builder
+      // Sign In
       .addCase(signIn.pending, (state) => {
         state.loading = true;
         state.error = null;
@@ -88,6 +98,7 @@ const authSlice = createSlice({
         state.loading = false;
         state.error = action.payload;
       })
+      // Sign Up
       .addCase(signUp.pending, (state) => {
         state.loading = true;
         state.error = null;
@@ -101,19 +112,32 @@ const authSlice = createSlice({
       .addCase(signUp.rejected, (state, action) => {
         state.loading = false;
         state.error = action.payload;
+      })
+      // Initialize Auth
+      .addCase(initializeAuth.pending, (state) => {
+        state.loading = true;
+        state.error = null;
+      })
+      .addCase(initializeAuth.fulfilled, (state, action) => {
+        state.loading = false;
+        state.token = action.payload;
+        state.isAuthenticated = true;
+      })
+      .addCase(initializeAuth.rejected, (state, action) => {
+        state.loading = false;
+        state.error = action.payload;
       });
   },
 });
 
 // Export all actions
-export const { 
+export const {
   openSignInForm,
   closeSignInForm,
   openSignUpForm,
   closeSignUpForm,
   signOut,
-  initializeAuth,
-  clearError
+  clearError,
 } = authSlice.actions;
 
 // Export aliases

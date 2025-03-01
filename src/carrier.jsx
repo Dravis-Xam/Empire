@@ -1,31 +1,30 @@
-import { useEffect } from 'react';
+import { useEffect, useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { Routes, Route, useNavigate } from 'react-router-dom';
-import { initializeAuth } from './features/auth/authSlice';
+import { initializeAuth } from './features/auth/authSlice'; 
 import ProtectedRoute from './features/auth/ProtectedRoute';
 import SignInForm from './components/SignIn|signup/SignIn';
 import SignUpForm from './components/SignIn|signup/SignUp';
 import App from './App';
 import Cart from './components/cart/Cart';
-import Payment from './components/payment/Payment';
 import Profile from './components/Profile/Profile';
 import AuthFormsContainer from './components/SignIn|signup/AuthFormsContainer';
-import ErrorBoundary from './features/auth/ErrorBoundary.jsx';
+import Payment from './components/payment/Payment';
 
 function Carrier() {
   const dispatch = useDispatch();
   const navigate = useNavigate();
-  const { loading } = useSelector((state) => state.auth);
-  const cartItems = useSelector((state) => state.cart.items); // Get cart items from Redux store
-  const totalPrice = useSelector((state) => state.cart.totalPrice); // Get total price from Redux store
-  const discountedPrice = useSelector((state) => state.cart.discountedPrice); // Get discounted price from Redux store
-  const discount = useSelector((state) => state.cart.discount); // Get discount from Redux store
+  const { loading: authLoading } = useSelector((state) => state.auth);
+  const [reducersLoaded, setReducersLoaded] = useState(false);
+ // Get discount from Redux store
 
   useEffect(() => {
-    dispatch(initializeAuth());
+    dispatch(initializeAuth()).then(() => {
+      setReducersLoaded(true); // Set reducersLoaded to true after auth initialization
+    });
   }, [dispatch]);
 
-  if (loading) return <div>Loading...</div>;
+  if (authLoading || !reducersLoaded) return <div>Loading...</div>;
 
   return (
     <Routes>
@@ -36,6 +35,7 @@ function Carrier() {
         <Route path='cart' element={<Cart />} />
         <Route path='/login' element={<AuthFormsContainer />} />
         <Route path='/signup' element={<AuthFormsContainer />} />
+        <Route path='/payment' element={<Payment />} />
 
         {/* Protected Routes */}
         <Route
@@ -43,22 +43,6 @@ function Carrier() {
           element={
             <ProtectedRoute>
               <Profile />
-            </ProtectedRoute>
-          }
-        />
-        <Route
-          path='payment'
-          element={
-            <ProtectedRoute>
-              <ErrorBoundary>
-                <Payment
-                  cart={cartItems}
-                  totalPrice={totalPrice}
-                  discountedPrice={discountedPrice}
-                  discount={discount}
-                  onClose={() => navigate('/')} // Navigate to home on close
-                />
-              </ErrorBoundary>
             </ProtectedRoute>
           }
         />
