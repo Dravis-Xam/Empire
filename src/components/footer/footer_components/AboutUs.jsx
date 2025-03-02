@@ -5,8 +5,9 @@ export default function AboutUs() {
     <div className="about-us-section">
         <h2>About Us</h2>
         <div>Home</div>
-        <div>Get In Touch</div>
+        <div>Legals</div>
         <div>FAQs</div>
+        <div>Privacy Policy</div>
     </div>
   )
 }

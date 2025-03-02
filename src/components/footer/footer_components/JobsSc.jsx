@@ -6,6 +6,5 @@ export default function JobsSc() {
         <div>Affiliates</div>
         <div>Partnerships</div>
         <div>Enterprises</div>
-        <div>Sources</div>
     </div>
 }

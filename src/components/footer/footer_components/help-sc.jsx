@@ -5,7 +5,6 @@ export default function HelpSc() {
         <h2>Help</h2>
         <div>Troubleshoot</div>
         <div>Virtual Assistant</div>
-        <div>Ask AI</div>
         <div>Support</div>
         <div>Report</div>
     </div>
