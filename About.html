@@ -3,9 +3,14 @@
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link rel="icon" type="image/x-icon" href="/public/Empire_hub_phone_(2).png">
     <title>Empire Hub Phones | About us</title>
     <!--styles in this file-->
     <link rel="stylesheet" href="/src/about.css" />
+    <link rel="stylesheet" href="/src/faqs.css" />
+    <link rel="stylesheet" href="/src/pns.css" />
+    <link rel="stylesheet" href="/src/jobs.css" />
+    <link rel="stylesheet" href="/src/help.css" />
   </head>
   <body>
     <!--header: fixed at the top, when user scrolls down hide header, scroll up show header-->
@@ -15,7 +20,6 @@
         <ul id="nav">
           <!--navigation: in tabs, at each li: show relative section in main section when clicked, and a blue 3px underline on active li-->
           <li><a href="#hero">Home</a></li>
-          <li><a href="#shop">Shop</a></li>
           <li><a href="#aboutUs">About Us</a></li>
           <li><a href="#ProductsServices">Products and Services</a></li>
           <li><a href="#Jobs">Jobs</a></li>
@@ -27,11 +31,244 @@
     <!--each div should fit the whole screen below the header. add smooth animation when user scrolls into view, the div floats up or down depending on direction of scroll and fades in. when scrolled out of view, it fades out and floats up or down depending on direction of scroll-->
     <section class="main">
       <div id="hero" class="section">Hero Section</div>
-      <div id="shop" class="section">Shop Section</div>
-      <div id="aboutUs" class="section">About Us Section</div>
-      <div id="ProductsServices" class="section">Products and Services Section</div>
-      <div id="Jobs" class="section">Jobs Section</div>
-      <div id="Help" class="section">Help Section</div>
+      <div id="aboutUs" class="section">
+        <div class="faqs-container" id="faqs">
+          <h2>Frequently Asked Questions</h2>
+          <div class="faq">
+            <div class="faq-question">
+              <h3>What is Empire Hub Phones?</h3>
+              <span class="toggle-icon">+</span>
+            </div>
+            <div class="faq-answer">
+              <p>Empire Hub Phones is a leading provider of high-quality smartphones and accessories. We offer a wide range of products and services to meet your mobile needs.</p>
+            </div>
+          </div>
+          <div class="faq">
+            <div class="faq-question">
+              <h3>How can I place an order?</h3>
+              <span class="toggle-icon">+</span>
+            </div>
+            <div class="faq-answer">
+              <p>You can place an order directly through our website by browsing our products, adding them to your cart, and proceeding to checkout.</p>
+            </div>
+          </div>
+          <div class="faq">
+            <div class="faq-question">
+              <h3>What payment methods do you accept?</h3>
+              <span class="toggle-icon">+</span>
+            </div>
+            <div class="faq-answer">
+              <p>We accept various payment methods, including credit/debit cards, PayPal, and mobile money services.</p>
+            </div>
+          </div>
+          <div class="faq">
+            <div class="faq-question">
+              <h3>Do you offer international shipping?</h3>
+              <span class="toggle-icon">+</span>
+            </div>
+            <div class="faq-answer">
+              <p>Yes, we offer international shipping to most countries. Shipping costs and delivery times may vary depending on your location.</p>
+            </div>
+          </div>
+          <div class="faq">
+            <div class="faq-question">
+              <h3>How can I contact customer support?</h3>
+              <span class="toggle-icon">+</span>
+            </div>
+            <div class="faq-answer">
+              <p>You can contact our customer support team via email at support@empirehubphones.com or by calling our toll-free number.</p>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div id="ProductsServices" class="section">
+        <div class="products-services-container">
+          <h2>Products and Services</h2>
+      
+          <!-- Products Section -->
+          <div class="products" id = "products">
+            <h3>Our Products</h3>
+            <div class="product-list">
+              <!-- Product 1 -->
+              <div class="product-card">
+                <img src="https://mtunda.com/cdn/shop/files/ZTE-Nubia-Red-Magic-10-Pro-1.png?v=1737471763&width=1100" alt="ZTE Nubic Red Magic Pro">
+                <h4>ZTE Nubic Red Magic Pro</h4>
+                <p><strong>Price:</strong> $600</p>
+                <p><strong>RAM:</strong> 16GB</p>
+                <p><strong>Storage:</strong> 1TB</p>
+                <p><strong>Battery:</strong> 7700mAh</p>
+              </div>
+      
+              <!-- Product 2 -->
+              <div class="product-card">
+                <img src="https://api.priceinkenya.com/media/135685/conversions/Infinix-Note-40-Pro-a-original.webp" alt="Infinix NOTE 40 I">
+                <h4>Infinix NOTE 40 I</h4>
+                <p><strong>Price:</strong> $240</p>
+                <p><strong>RAM:</strong> 16GB</p>
+                <p><strong>Storage:</strong> 1TB</p>
+                <p><strong>Battery:</strong> 7700mAh</p>
+              </div>
+      
+              <!-- Product 3 -->
+              <div class="product-card">
+                <img src="https://www.mobilehub.co.ke/storage/2024/10/Samsung-S24-Ultra-Price-in-Kenya-001-Mobilehub-Kenya.jpg" alt="Samsung S24">
+                <h4>Samsung S24</h4>
+                <p><strong>Price:</strong> $960</p>
+                <p><strong>RAM:</strong> 16GB</p>
+                <p><strong>Storage:</strong> 1TB</p>
+                <p><strong>Battery:</strong> 7700mAh</p>
+              </div>
+            </div>
+            <!-- "See more ..." Link -->
+            <div class="see-more">
+              <a href="/">See more ...</a>
+            </div>
+          </div>
+      
+          <!-- Services Section -->
+          <div class="services" id = "services">
+            <h3>After-Sale Services</h3>
+            <div class="service-list">
+              <!-- Delivery Service -->
+              <div class="service-card">
+                <img src="https://cdn-icons-png.flaticon.com/128/709/709790.png" alt="Delivery">
+                <h4>Fast Delivery</h4>
+                <p>We offer fast and reliable delivery services to ensure your product reaches you on time.</p>
+              </div>
+      
+              <!-- Warranty Service -->
+              <div class="service-card">
+                <img src="https://cdn-icons-png.flaticon.com/128/3405/3405763.png" alt="Warranty">
+                <h4>Warranty</h4>
+                <p>All our products come with a 1-year warranty to protect against manufacturing defects.</p>
+              </div>
+      
+              <!-- Phone Servicing -->
+              <div class="service-card">
+                <img src="https://cdn-icons-png.flaticon.com/128/1086/1086581.png" alt="Phone Servicing">
+                <h4>Phone Servicing</h4>
+                <p>We provide professional phone servicing and repairs to keep your device in top condition.</p>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div id="Jobs" class="section">
+        <div class="jobs-container">
+          <h2>Join Our Team</h2>
+          <p>Explore exciting career opportunities with Empire Hub Phones.</p>
+      
+          <!-- Job Cards -->
+          <div class="job-list">
+            <!-- Affiliate Marketer -->
+            <div class="job-card" id="affiliate">
+              <h3>Affiliate Marketer</h3>
+              <p><strong>Location:</strong> Remote</p>
+              <p><strong>Type:</strong> Full-Time</p>
+              <p><strong>Description:</strong> Promote our products and earn commissions by driving sales through your affiliate links.</p>
+              <p><strong>Requirements:</strong></p>
+              <ul>
+                <li>Experience in affiliate marketing.</li>
+                <li>Strong social media presence.</li>
+                <li>Excellent communication skills.</li>
+              </ul>
+              <button class="apply-btn">Apply Now</button>
+            </div>
+      
+            <!-- Partnership Manager -->
+            <div class="job-card" id = "partnership">
+              <h3>Partnership Manager</h3>
+              <p><strong>Location:</strong> On-Site</p>
+              <p><strong>Type:</strong> Full-Time</p>
+              <p><strong>Description:</strong> Build and manage strategic partnerships to grow our business network.</p>
+              <p><strong>Requirements:</strong></p>
+              <ul>
+                <li>Proven experience in partnership management.</li>
+                <li>Strong negotiation skills.</li>
+                <li>Ability to build long-term relationships.</li>
+              </ul>
+              <button class="apply-btn">Apply Now</button>
+            </div>
+      
+            <!-- Enterprise Sales Representative -->
+            <div class="job-card" id = "enterprices">
+              <h3>Enterprise Sales Representative</h3>
+              <p><strong>Location:</strong> On-Site</p>
+              <p><strong>Type:</strong> Full-Time</p>
+              <p><strong>Description:</strong> Drive sales by targeting enterprise clients and closing high-value deals.</p>
+              <p><strong>Requirements:</strong></p>
+              <ul>
+                <li>Experience in B2B sales.</li>
+                <li>Strong presentation and pitching skills.</li>
+                <li>Ability to meet sales targets.</li>
+              </ul>
+              <button class="apply-btn">Apply Now</button>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div id="Help" class="section">
+        <div class="help-container">
+          <h2>Help Center</h2>
+          <p>Find solutions to common issues or get in touch with our support team.</p>
+      
+          <!-- Help Cards -->
+          <div class="help-list">
+            <!-- Troubleshoot -->
+            <div class="help-card">
+              <h3>Troubleshoot</h3>
+              <p>Having issues with your device? Follow our step-by-step troubleshooting guides to resolve common problems.</p>
+              <a href="#troubleshoot" class="help-link">Go to Troubleshoot</a>
+            </div>
+      
+            <!-- Support -->
+            <div class="help-card" >
+              <h3>Support</h3>
+              <p>Need assistance? Contact our support team for help with your device, account, or services.</p>
+              <a href="#support" class="help-link">Go to Support</a>
+            </div>
+      
+            <!-- Report -->
+            <div class="help-card" >
+              <h3>Report</h3>
+              <p>Found a bug or have a complaint? Report it to us, and we'll address it as soon as possible.</p>
+              <a href="#report" class="help-link">Go to Report</a>
+            </div>
+          </div>
+        </div>
+      
+        <!-- Sections for Troubleshoot, Support, and Report -->
+        <div id="troubleshoot" class="help-section">
+          <h3>Troubleshoot</h3>
+          <p>Here are some common troubleshooting steps:</p>
+          <ul>
+            <li>Restart your device.</li>
+            <li>Check for software updates.</li>
+            <li>Reset your device to factory settings (if necessary).</li>
+          </ul>
+        </div>
+      
+        <div id="support" class="help-section">
+          <h3>Support</h3>
+          <p>Contact our support team:</p>
+          <ul>
+            <li>Email: support@empirehubphones.com</li>
+            <li>Phone: +1-800-123-4567</li>
+            <li>Live Chat: Available on our website.</li>
+          </ul>
+        </div>
+      
+        <div id="report" class="help-section">
+          <h3>Report</h3>
+          <p>To report an issue, please provide the following details:</p>
+          <ul>
+            <li>Your name and contact information.</li>
+            <li>A description of the issue.</li>
+            <li>Screenshots or error messages (if applicable).</li>
+          </ul>
+          <button class="report-btn">Submit Report</button>
+        </div>
+      </div>
     </section>
 
     <!--Footer: styling only: suggest best styles-->
@@ -107,5 +344,28 @@
 
       sections.forEach((section) => observer.observe(section));
     </script>
+
+    <script>
+      // JavaScript to toggle FAQ answers
+      const faqQuestions = document.querySelectorAll('.faq-question');
+
+      faqQuestions.forEach((question) => {
+        question.addEventListener('click', () => {
+          const answer = question.nextElementSibling;
+          const toggleIcon = question.querySelector('.toggle-icon');
+
+          // Toggle answer visibility
+          answer.classList.toggle('active');
+
+          // Change toggle icon
+          if (answer.classList.contains('active')) {
+            toggleIcon.textContent = '−'; // Minus icon
+          } else {
+            toggleIcon.textContent = '+'; // Plus icon
+          }
+        });
+      });
+    </script>
+
   </body>
 </html>

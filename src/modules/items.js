@@ -43,7 +43,7 @@ const items = [
             b_life: "48Hrs",
             b_capacity: "7700mAh",
             look: "Silvery",
-            image: "https://i.ytimg.com/vi/GHZwRPskGc4/maxresdefault.jpg"
+            image: "https://www.mobilehub.co.ke/storage/2024/10/Samsung-S24-Ultra-Price-in-Kenya-001-Mobilehub-Kenya.jpg"
         },
         quantity: 200,
     }, {
