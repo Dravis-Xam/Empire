@@ -1,7 +1,15 @@
 /* General Styles */
+
+@import url('https://fonts.googleapis.com/css2?family=Dosis:wght@200..800&family=Noto+Sans:ital,wght@0,100..900;1,100..900&display=swap');
+
 body {
     margin: 0;
-    font-family: Arial, sans-serif;
+    font-family: Noto Sans, Dosis;
+    padding-top: 60px;
+  }
+
+  h1, h2, h3, h4, p {
+    font-family: Noto Sans;
   }
   
   /* Header Styles */
@@ -14,11 +22,15 @@ body {
     box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
     transition: transform 0.3s ease-in-out;
     z-index: 1000;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
   }
   
   header h1 {
     margin: 0;
     padding: 10px 20px;
+    display: inline;
   }
   
   header ul {

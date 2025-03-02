@@ -7,8 +7,9 @@ body {
   } 
   
   .help-container {
-    max-width: 1200px;
+    width: 100%;
     margin: 50px auto;
+    position: relative;
     padding: 20px;
     background-color: #fff;
     border-radius: 8px;
@@ -17,14 +18,16 @@ body {
   
   .help-container h2 {
     text-align: center;
-    color: #333;
+    color: #da1111;
     margin-bottom: 10px;
+    font-size: 24px;
   }
   
   .help-container p {
     text-align: center;
     color: #555;
     margin-bottom: 30px;
+    font-size: 18px;
   }
   
   /* Help Cards */
@@ -52,11 +55,13 @@ body {
   .help-card h3 {
     margin: 0 0 10px;
     color: #333;
+    font-size: 20px;
   }
   
   .help-card p {
     margin: 10px 0;
     color: #555;
+    font-size: 14px;
   }
   
   .help-link {
@@ -70,10 +75,17 @@ body {
   .help-link:hover {
     color: #0056b3;
   }
-  
+  .help-section-container {
+    display: flex;
+    align-items: top;
+    justify-content: center;
+    gap: 20px;
+  }
   /* Help Sections */
   .help-section {
     margin-top: 40px;
+    width: 300px;
+    display: inline-block;
     padding: 20px;
     background-color: #f5f5f5;
     border-radius: 8px;
@@ -83,11 +95,14 @@ body {
   .help-section h3 {
     margin: 0 0 10px;
     color: #333;
+    font-size: 20px;
   }
   
   .help-section p {
     margin: 10px 0;
     color: #555;
+    font-size: 14px;
+    text-align: left;
   }
   
   .help-section ul {
@@ -98,6 +113,7 @@ body {
   .help-section ul li {
     margin: 5px 0;
     color: #555;
+    font-size: 14px;
   }
   
   /* Report Button */

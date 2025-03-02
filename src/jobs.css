@@ -7,7 +7,7 @@ body {
   }
   
   .jobs-container {
-    max-width: 1200px;
+    width: 100%;
     margin: 50px auto;
     padding: 20px;
     background-color: #fff;
@@ -17,14 +17,16 @@ body {
   
   .jobs-container h2 {
     text-align: center;
-    color: #333;
+    color: #c21919;
     margin-bottom: 10px;
+    font-size: 30px;
   }
   
   .jobs-container p {
     text-align: center;
     color: #555;
     margin-bottom: 30px;
+    font-size: 14px;
   }
   
   /* Job Cards */
@@ -52,11 +54,15 @@ body {
   .job-card h3 {
     margin: 0 0 10px;
     color: #333;
+    font-size: 20px;
+    text-align: center;
   }
   
   .job-card p {
     margin: 5px 0;
     color: #555;
+    font-size: 16px;
+    text-align: left;
   }
   
   .job-card ul {
@@ -67,6 +73,8 @@ body {
   .job-card ul li {
     margin: 5px 0;
     color: #555;
+    text-align: left;
+    font-size: 14px;
   }
   
   /* Apply Button */
