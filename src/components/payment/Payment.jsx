@@ -158,7 +158,7 @@ export default function Payment() {
                     onChange={(e) => handleInputChange('bankCard', 'cardNumber', e.target.value)}
                   />
                   <input
-                    type="text"
+                    type="date"
                     placeholder="Expiry Date"
                     value={paymentDetails.bankCard.expiryDate}
                     onChange={(e) => handleInputChange('bankCard', 'expiryDate', e.target.value)}

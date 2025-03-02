@@ -2,7 +2,7 @@
     position: absolute;
     background-color: green;
     right: 0;
-    top: 250vh;
+    top: 200vh;
     height: 50px;
     width: 50px;
     display: flex;
@@ -10,6 +10,12 @@
     border-bottom-left-radius: 30px;
     align-items: center;
     justify-content: center;
+}
+
+@media (max-width: 1000px) {
+    .whatsapp-chat-link {
+        top: 250vh;
+    }
 }
 
 .whatsapp-chat-link a {

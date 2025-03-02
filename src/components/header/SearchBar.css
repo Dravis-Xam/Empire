@@ -1,3 +1,8 @@
+.searchbar-container {
+    position: relative;
+    width: fit-content;
+}
+
 .searchbar {
     width: fit-content;
     display: flex;
@@ -54,4 +59,84 @@
     height: 15px;
     width: 15px;
     transition: all 0.3s ease-in-out;
+}
+.search-results {
+    position: absolute;
+    top: 100%;
+    left: 0;
+    right: 0;
+    background: white;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    z-index: 1000;
+    max-height: 300px;
+    overflow-y: auto;
+    margin-top: 5px; /* Add some space between the search bar and results */
+}
+
+.search-result-item {
+    display: flex;
+    align-items: center;
+    padding: 8px;
+    border-bottom: 1px solid #eee;
+    cursor: pointer; /* Indicate clickable items */
+}
+
+.search-result-item:hover {
+    background-color: #f9f9f9; /* Add hover effect */
+}
+
+.search-result-item:last-child {
+    border-bottom: none;
+}
+
+.item-image {
+    width: 50px;
+    height: 50px;
+    margin-right: 16px;
+    border-radius: 4px;
+}
+
+.item-details {
+    flex: 1;
+}
+
+.item-details h3 {
+    margin: 0;
+    font-size: 16px;
+}
+
+.item-details p {
+    margin: 4px 0 0;
+    font-size: 14px;
+    color: #666;
+}
+
+/* Selected Item Card Styles */
+/* SearchBar.css */
+.selected-item-card {
+    position: absolute; /* Ensure the close button is positioned relative to the card */
+    margin-top: 20px; /* Add space between search bar and card */
+    border: 1px solid #ccc;
+    border-radius: 8px;
+    padding: 16px;
+    background-color: #ffffffa4;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+}
+
+.close-btn {
+    position: absolute;
+    top: -10px;
+    right: -10px;
+    background: none;
+    border: none;
+    font-size: 20px;
+    cursor: pointer;
+    color: #ff1515;
+}
+
+.close-btn:hover {
+    color: #000;
+    scale: 1.01; /* Change color on hover */
 }

@@ -1,7 +1,7 @@
 import React from 'react';
 import PropTypes from 'prop-types'; // Import PropTypes
 import AddToCartButton from './AddItem';
-import './item.css';
+import './item.css'; 
 
 function Item({ prop }) {
     return (
