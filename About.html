@@ -4,38 +4,108 @@
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Empire Hub Phones | About us</title>
+    <!--styles in this file-->
+    <link rel="stylesheet" href="/src/about.css" />
   </head>
   <body>
-    <header>
+    <!--header: fixed at the top, when user scrolls down hide header, scroll up show header-->
+    <header id="header">
       <h1>Empire Hub Phones</h1>
       <div>
-        <ul>
-          <li><a href="">Home</a></li>
-          <li><a href="">Shop</a></li>
-          <li><a href="">About Us</a></li>
-          <li><a href="">Products and Services</a></li>
-          <li><a href="">Jobs</a></li>
-          <li><a href="">Help</a></li>
+        <ul id="nav">
+          <!--navigation: in tabs, at each li: show relative section in main section when clicked, and a blue 3px underline on active li-->
+          <li><a href="#hero">Home</a></li>
+          <li><a href="#shop">Shop</a></li>
+          <li><a href="#aboutUs">About Us</a></li>
+          <li><a href="#ProductsServices">Products and Services</a></li>
+          <li><a href="#Jobs">Jobs</a></li>
+          <li><a href="#Help">Help</a></li>
         </ul>
       </div>
     </header>
-    <section class="main"></section>
+    <!--content: link to nav, add styling-->
+    <!--each div should fit the whole screen below the header. add smooth animation when user scrolls into view, the div floats up or down depending on direction of scroll and fades in. when scrolled out of view, it fades out and floats up or down depending on direction of scroll-->
+    <section class="main">
+      <div id="hero" class="section">Hero Section</div>
+      <div id="shop" class="section">Shop Section</div>
+      <div id="aboutUs" class="section">About Us Section</div>
+      <div id="ProductsServices" class="section">Products and Services Section</div>
+      <div id="Jobs" class="section">Jobs Section</div>
+      <div id="Help" class="section">Help Section</div>
+    </section>
+
+    <!--Footer: styling only: suggest best styles-->
     <section class="footer">
       <div>
         <h1>Empire Hub Phones</h1>
       </div>
-      <div>
+      <div class="social-icons">
         <div><a href=""><img src='https://cdn-icons-png.flaticon.com/128/1216/1216915.png' alt='twitter'/></a></div>
         <div><a href=""><img src='https://cdn-icons-png.flaticon.com/128/3670/3670274.png' alt='Instagram'/></a></div>
         <div><a href=""><img src='https://cdn-icons-png.flaticon.com/128/4401/4401403.png' alt='Facebook'/></a></div>
         <div><a href=""><img src='https://cdn-icons-png.flaticon.com/128/15047/15047068.png' alt='tiktok'/></a></div>
       </div>
-      <div>
+      <div class="footer-text">
         <span>@</span>
         <span>2025</span>
         <span>|</span>
         <span>Rules and Regulations applied.</span>
       </div>
     </section>
+
+    <!--JavaScript for interactivity-->
+    <script>
+      // Header hide/show on scroll
+      let lastScroll = 0;
+      const header = document.getElementById("header");
+
+      window.addEventListener("scroll", () => {
+        const currentScroll = window.pageYOffset;
+
+        if (currentScroll > lastScroll) {
+          // Scrolling down
+          header.style.transform = "translateY(-100%)";
+        } else {
+          // Scrolling up
+          header.style.transform = "translateY(0)";
+        }
+        lastScroll = currentScroll;
+      });
+
+      // Navigation active tab underline
+      const navLinks = document.querySelectorAll("#nav a");
+
+      navLinks.forEach((link) => {
+        link.addEventListener("click", (e) => {
+          e.preventDefault();
+          navLinks.forEach((link) => link.classList.remove("active"));
+          link.classList.add("active");
+
+          // Scroll to the corresponding section
+          const targetId = link.getAttribute("href");
+          document.querySelector(targetId).scrollIntoView({
+            behavior: "smooth",
+          });
+        });
+      });
+
+      // Section animations on scroll
+      const sections = document.querySelectorAll(".section");
+
+      const observer = new IntersectionObserver(
+        (entries) => {
+          entries.forEach((entry) => {
+            if (entry.isIntersecting) {
+              entry.target.classList.add("fade-in");
+            } else {
+              entry.target.classList.remove("fade-in");
+            }
+          });
+        },
+        { threshold: 0.5 }
+      );
+
+      sections.forEach((section) => observer.observe(section));
+    </script>
   </body>
 </html>

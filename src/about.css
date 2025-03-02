@@ -1,0 +1,93 @@
+/* General Styles */
+body {
+    margin: 0;
+    font-family: Arial, sans-serif;
+  }
+  
+  /* Header Styles */
+  header {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    background-color: #fff;
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+    transition: transform 0.3s ease-in-out;
+    z-index: 1000;
+  }
+  
+  header h1 {
+    margin: 0;
+    padding: 10px 20px;
+  }
+  
+  header ul {
+    list-style: none;
+    display: flex;
+    margin: 0;
+    padding: 0;
+  }
+  
+  header ul li {
+    margin: 0 10px;
+  }
+  
+  header ul li a {
+    text-decoration: none;
+    color: #000;
+    padding: 5px 10px;
+    transition: border-bottom 0.3s ease;
+  }
+  
+  header ul li a.active {
+    border-bottom: 3px solid blue;
+  }
+  
+  /* Main Section Styles */
+  .main {
+    margin-top: 60px; /* Adjust based on header height */
+  }
+  
+  .section {
+    height: 100vh;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 2rem;
+    opacity: 0;
+    transform: translateY(20px);
+    transition: opacity 0.5s ease, transform 0.5s ease;
+  }
+  
+  .section.fade-in {
+    opacity: 1;
+    transform: translateY(0);
+  }
+  
+  /* Footer Styles */
+  .footer {
+    background-color: #333;
+    color: #fff;
+    text-align: center;
+    padding: 20px;
+  }
+  
+  .footer h1 {
+    margin: 0;
+  }
+  
+  .social-icons {
+    display: flex;
+    justify-content: center;
+    gap: 15px;
+    margin: 10px 0;
+  }
+  
+  .social-icons img {
+    width: 24px;
+    height: 24px;
+  }
+  
+  .footer-text {
+    font-size: 0.9rem;
+  }
