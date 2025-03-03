@@ -92,3 +92,9 @@
       filter: hue-rotate(360deg);
     }
 }
+
+a {
+    text-decoration: none;
+    color: rgb(49, 82, 1);
+    font-weight: 500;
+}
