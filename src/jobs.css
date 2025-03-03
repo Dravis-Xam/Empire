@@ -93,3 +93,8 @@ body {
   .apply-btn:hover {
     background-color: #0056b3;
   }
+
+  .apply-link {
+    text-decoration: none;
+    color: white;
+  }

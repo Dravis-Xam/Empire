@@ -64,18 +64,23 @@ header ul li a.active {
   margin-right: 10px;
 }
 
-button {
+.login-button,
+.sign-up-button {
   border: none;
   padding: 6px;
   cursor: pointer;
   margin-right: 10px;
-  width: 65px;
+  width: 85px;
   border-radius: 3px;
   transition: all 0.3s ease;
   font-family: 'Noto Sans', sans-serif;
+  background-color: #d9d9d9;
+  text-decoration: none;
+  color: black;
 }
 
-button:hover {
+.login-button:hover,
+.sign-up-button:hover {
   font-weight: 700;
 }
 

@@ -1,0 +1,92 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <link rel="icon" type="image/x-icon" href="/public/Empire_hub_phone_(2).png">
+  <title>Login or Sign Up</title>
+  <link rel="stylesheet" href="/src/auth.css">
+</head>
+<body>
+  <div class="auth-container">
+    <!-- Login Form -->
+    <div id="login-form" class="form-container">
+      <h2>Login</h2>
+      <form id="login">
+        <input type="email" id="login-email" name="email" placeholder="Email" required>
+        <input type="password" id="login-password" name="password" placeholder="Password" required>
+        <button type="submit">Login</button>
+      </form>
+      <div class="switch-form">
+        <p>Don't have an account?</p>
+        <button onclick="switchToSignUp()">Sign Up</button>
+      </div>
+    </div>
+
+    <!-- Sign Up Form -->
+    <div id="signup-form" class="form-container">
+      <h2>Sign Up</h2>
+      <form id="signup">
+        <input type="text" id="signup-name" name="name" placeholder="Full Name" required>
+        <input type="email" id="signup-email" name="email" placeholder="Email" required>
+        <input type="password" id="signup-password" name="password" placeholder="Password" required>
+        <button type="submit">Sign Up</button>
+      </form>
+      <div class="switch-form">
+        <p>Already have an account?</p>
+        <button onclick="switchToLogin()">Login</button>
+      </div>
+    </div>
+  </div>
+
+  <script>
+    // Function to switch to the Sign Up form
+    function switchToSignUp() {
+      const loginForm = document.getElementById('login-form');
+      const signupForm = document.getElementById('signup-form');
+
+      // Animate Login form sliding to the left and fading out
+      loginForm.style.animation = 'slideOutLeft 0.5s forwards';
+      loginForm.addEventListener('animationend', () => {
+        loginForm.classList.remove('active');
+        signupForm.classList.add('active');
+        signupForm.style.animation = 'slideInRight 0.5s forwards';
+      }, { once: true });
+    }
+
+    // Function to switch to the Login form
+    function switchToLogin() {
+      const loginForm = document.getElementById('login-form');
+      const signupForm = document.getElementById('signup-form');
+
+      // Animate Sign Up form sliding to the right and fading out
+      signupForm.style.animation = 'slideOutRight 0.5s forwards';
+      signupForm.addEventListener('animationend', () => {
+        signupForm.classList.remove('active');
+        loginForm.classList.add('active');
+        loginForm.style.animation = 'slideInLeft 0.5s forwards';
+      }, { once: true });
+    }
+
+    // Function to check the URL query parameter and show the correct form
+    function checkFormToShow() {
+      const urlParams = new URLSearchParams(window.location.search);
+      const form = urlParams.get('form');
+
+      const loginForm = document.getElementById('login-form');
+      const signupForm = document.getElementById('signup-form');
+
+      if (form === 'signup') {
+        loginForm.classList.remove('active');
+        signupForm.classList.add('active');
+      } else {
+        loginForm.classList.add('active');
+        signupForm.classList.remove('active');
+      }
+    }
+
+    // Call the function when the page loads
+    checkFormToShow();
+  </script>
+</body>
+</html>

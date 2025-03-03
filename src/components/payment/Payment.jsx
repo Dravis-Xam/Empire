@@ -4,7 +4,6 @@ import { ChevronDown, X } from 'lucide-react';
 import { useLocation, useNavigate } from 'react-router-dom';
 
 export default function Payment() {
-
   const location = useLocation();
   const navigate = useNavigate();
   const { cartItems, totalPrice, discount, discountedPrice } = location.state || {
@@ -27,16 +26,20 @@ export default function Payment() {
   const [suggestedCurrencies, setSuggestedCurrencies] = useState([]);
   const [convertedPrice, setConvertedPrice] = useState(null);
 
-  // Fetch exchange rates from FastForex API
+  // Fetch exchange rates from exchangerate-api
   useEffect(() => {
     const fetchExchangeRates = async () => {
       try {
         const apiKey = import.meta.env.VITE_CURRENCY_CONVERTER_API;
         const response = await fetch(
-          `https://api.fastforex.io/fetch-all?api_key=${apiKey}`
+          `https://v6.exchangerate-api.com/v6/${apiKey}/latest/USD` // Fetch rates for USD as base currency
         );
         const data = await response.json();
-        setExchangeRates(data.results);
+        if (data.result === 'success') {
+          setExchangeRates(data.conversion_rates); // Set the conversion rates
+        } else {
+          console.error('Failed to fetch exchange rates:', data['error-type']);
+        }
       } catch (error) {
         console.error('Failed to fetch exchange rates:', error);
       }
@@ -44,7 +47,7 @@ export default function Payment() {
     fetchExchangeRates();
   }, []);
 
-  // Handle currency search 
+  // Handle currency search
   useEffect(() => {
     if (currencySearch) {
       const filteredCurrencies = Object.keys(exchangeRates).filter((curr) =>
@@ -59,8 +62,13 @@ export default function Payment() {
   // Convert price to selected currency
   const handleConvertPrice = () => {
     if (convertedPrice === null) {
-      const converted = (discountedPrice * exchangeRates[currency]).toFixed(2);
-      setConvertedPrice(converted);
+      const rate = exchangeRates[currency];
+      if (rate) {
+        const converted = (discountedPrice * rate).toFixed(2);
+        setConvertedPrice(converted);
+      } else {
+        console.error('Invalid currency selected');
+      }
     } else {
       setConvertedPrice(null);
       setCurrency('USD');
@@ -84,9 +92,8 @@ export default function Payment() {
   const handlePayment = () => {
     console.log('Payment Details:', paymentDetails);
     alert('Payment processed successfully!');
-    onClose();
+    navigate('/');
   };
-
 
   return (
     <div className='payment-container-overlay' onClick={() => navigate('/')}>
@@ -130,7 +137,7 @@ export default function Payment() {
               </ul>
             )}
             <button onClick={handleConvertPrice} className='convert-curr-btn'>
-              {convertedPrice === null ? 'Convert' : 'Reset' }
+              {convertedPrice === null ? 'Convert' : 'Reset'}
             </button>
           </div>
         </div>
