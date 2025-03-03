@@ -1,19 +1,7 @@
-/* General Styles */
+/* Header Styles */
 
 @import url('https://fonts.googleapis.com/css2?family=Dosis:wght@200..800&family=Noto+Sans:ital,wght@0,100..900;1,100..900&display=swap');
 
-body {
-    margin: 0;
-    font-family: Noto Sans, Dosis;
-    padding-top: 60px;
-  }
-
-  h1, h2, h3, h4, p {
-    font-family: Noto sans;
-  }
-  
-  /* Header Styles */
-/* Header Styles */
 header {
   position: fixed;
   top: 0;
@@ -22,14 +10,16 @@ header {
   background-color: #fff;
   box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
   transition: transform 0.3s ease-in-out;
-  z-index: 1000;
+  z-index: 950;
   padding: 10px 20px; /* Add padding for better spacing */
+  font-family: Noto sans;
 }
 
 .header-top {
   display: flex;
   align-items: center;
   justify-content: space-between;
+  position: relative;
 }
 
 header h1 {
@@ -37,12 +27,15 @@ header h1 {
   display: inline;
 }
 
-header ul {
+header ul#nav {
   list-style: none;
   display: flex;
   margin: 0;
   padding: 0;
-  transform: translate(30%, -30px);
+  /* Remove the transform property */
+  z-index: 500;
+  flex-grow: 1; /* Allow the nav to take up available space */
+  justify-content: center; /* Center the navigation items */
 }
 
 header ul li {
@@ -62,6 +55,8 @@ header ul li a.active {
 
 .logbtns {
   margin-right: 10px;
+  display: flex;
+  gap: 10px; /* Add space between login and signup buttons */
 }
 
 .login-button,
@@ -69,14 +64,14 @@ header ul li a.active {
   border: none;
   padding: 6px;
   cursor: pointer;
-  margin-right: 10px;
-  width: 85px;
+  width: 80px; /* Adjust button width */
   border-radius: 3px;
   transition: all 0.3s ease;
   font-family: 'Noto Sans', sans-serif;
   background-color: #d9d9d9;
   text-decoration: none;
   color: black;
+  text-align: center;
 }
 
 .login-button:hover,
@@ -94,9 +89,7 @@ header ul li a.active {
 
   header ul {
     justify-content: center; /* Center the navigation items */
-    margin-top: 20px;
-    transform: none;
-     /* Add space between the top row and nav */
+    margin-top: 20px; /* Add space between the top row and nav */
   }
 
   header ul li {
@@ -107,7 +100,8 @@ header ul li a.active {
     padding: 5px; /* Adjust padding for smaller screens */
   }
 }
-  
+
+
   /* Main Section Styles */
   .main {
     margin-top: 60px; /* Adjust based on header height */
@@ -199,4 +193,4 @@ header ul li a.active {
       font-size: 14px;
       margin: none;
     }
-  }
+  }  

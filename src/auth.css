@@ -1,6 +1,8 @@
 /* General Styles */
+@import url('https://fonts.googleapis.com/css2?family=Dosis:wght@200..800&family=Noto+Sans:ital,wght@0,100..900;1,100..900&display=swap');
+
 body {
-    font-family: Arial, sans-serif;
+    font-family: Noto sans, arial;
     margin: 0;
     padding: 0;
     background-color: #f9f9f9;
@@ -15,6 +17,7 @@ body {
     border-radius: 8px;
     box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
     padding: 20px;
+    padding-right: 30px;
     width: 100%;
     max-width: 400px;
     position: relative;
@@ -41,10 +44,35 @@ body {
     width: 100%;
     padding: 10px;
     margin-bottom: 10px;
-    border: 1px solid #ccc;
+    border: 0.4px solid #ccc;
     border-radius: 5px;
     font-size: 16px;
+    font-family: 'Noto Sans', Arial, sans-serif;
+    transition: all 0.3s ease;
+    outline: none; /* Remove default browser outline */
   }
+  
+  input:focus {
+    border: 0.4px solid green;
+    box-shadow: 0 0 5px rgba(0, 128, 0, 0.3); /* Add a subtle glow effect */
+  }
+  
+  /* Optional: Add styles for placeholder text */
+  input::placeholder {
+    color: #999;
+    font-style: italic;
+  }
+  
+  /* Optional: Add styles for invalid inputs */
+  input:invalid {
+    border-color: #ff4444; /* Red border for invalid inputs */
+  }
+  
+  input:invalid:focus {
+    border-color: #ff4444;
+    box-shadow: 0 0 5px rgba(255, 68, 68, 0.3); /* Red glow for invalid inputs */
+  }
+
   
   button[type="submit"] {
     width: 100%;

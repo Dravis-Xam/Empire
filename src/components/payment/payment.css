@@ -9,7 +9,7 @@
   display: flex;
   justify-content: center;
   align-items: center;
-  z-index: 999;
+  z-index: 1000;
 }
 
 /* Payment container */
@@ -23,12 +23,12 @@
   font-family: Montserrat;
   padding: 20px;
   max-width: 500px;
-  width: 75%;
+  width: 90%;
   max-height: 90vh;
   overflow-y: auto;
   box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
   border-radius: 8px;
-  z-index: 1001;
+  z-index: 1000;
 }
 
 /* Close button */
@@ -86,27 +86,12 @@
   padding: 10px 0;
 }
 
-.payment-details > input {
-  padding: 6px;
-  font-family: Montserrat;
-  margin-top: 10px;
-  margin-left: 5px;
-  margin-bottom: 10px;
-}
-
 /* Cart summary */
 .cart-summary {
-  margin-top: 20px;
   margin-bottom: 20px;
   padding: 15px;
-  border: .1px solid #ddd;
+  border: 1px solid #ddd;
   border-radius: 8px;
-  font-family: Montserrat;
-  box-shadow: 
-  0 0 1px rgba(0, 0, 0, 0.5),
-  0 1px 5px rgba(0, 0, 0, 0.3),
-  0 5px 8px rgba(0, 0, 0, 0.1)
-  ;
 }
 
 .cart-summary h3 {
@@ -118,21 +103,6 @@
 .cart-summary p {
   margin: 5px 0;
   font-size: 14px;
-}
-.convert-curr-btn {
-  background-color: #4caf50;
-  padding: 5px;
-  border-radius: 5px;
-  font-weight: 800;
-  color: white;
-  margin: 10px;
-}
-
-.convert-curr-btn:hover {
-  scale: 1.08;
-  border: .4px solid #4caf50;
-  color: #4caf50;
-  background-color: white;
 }
 
 .cart-summary p:last-child {
@@ -150,7 +120,7 @@
 }
 
 .currency-converter input {
-  width: 80%;
+  width: 100%;
   padding: 8px;
   margin-top: 5px;
   border: 1px solid #ccc;
@@ -181,14 +151,13 @@
 
 /* Complete purchase button */
 .complete_purchase {
-  width: 300px;
+  width: 100%;
   padding: 10px;
   background-color: #4caf50;
   color: white;
   border: none;
   border-radius: 4px;
   font-size: 16px;
-  left: 50%;
   font-weight: 500;
   cursor: pointer;
   transition: background-color 0.3s ease;
@@ -196,5 +165,4 @@
 
 .complete_purchase:hover {
   background-color: #45a049;
-  scale: 1;
 }

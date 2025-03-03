@@ -1,6 +1,8 @@
 /* General Styles */
+@import url('https://fonts.googleapis.com/css2?family=Dosis:wght@200..800&family=Noto+Sans:ital,wght@0,100..900;1,100..900&display=swap');
+
 body {
-    font-family: Arial, sans-serif;
+    font-family: Noto sans, Arial;
     margin: 0;
     padding: 0;
     background-color: #f9f9f9;
