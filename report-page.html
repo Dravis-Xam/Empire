@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <link rel="icon" type="image/x-icon" href="/public/Empire_hub_phone_(2).png">
+  <title>Empire Hub Phones | Report an Issue</title>
+  <link rel="stylesheet" href="/src/report.css">
+</head>
+<body>
+  <div class="report-container">
+    <h2>Report an Issue</h2>
+    <p>Please provide the following details to help us resolve your issue.</p>
+
+    <!-- Report Form -->
+    <form class="report-form">
+      <!-- Name -->
+      <div class="form-group">
+        <label for="name">Your Name</label>
+        <input type="text" id="name" name="name" placeholder="Enter your name" required>
+      </div>
+
+      <!-- Contact Information -->
+      <div class="form-group">
+        <label for="contact">Contact Information</label>
+        <input type="text" id="contact" name="contact" placeholder="Enter your email or phone number" required>
+      </div>
+
+      <!-- Description of the Issue -->
+      <div class="form-group">
+        <label for="description">Description of the Issue</label>
+        <textarea id="description" name="description" placeholder="Describe the issue in detail" rows="5" required></textarea>
+      </div>
+
+      <!-- Screenshots or Error Messages -->
+      <div class="form-group">
+        <label for="screenshots">Screenshots or Error Messages</label>
+        <input type="file" id="screenshots" name="screenshots" accept="image/*,.pdf" multiple>
+        <small>You can upload images (JPEG, PNG) or PDF files.</small>
+      </div>
+
+      <!-- Submit Button -->
+      <div class="form-group">
+        <button type="submit" class="submit-btn">Submit Report</button>
+      </div>
+    </form>
+  </div>
+</body>
+</html>

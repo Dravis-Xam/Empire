@@ -15,10 +15,15 @@
   <body>
     <!--header: fixed at the top, when user scrolls down hide header, scroll up show header-->
     <header id="header">
-      <h1>Empire Hub Phones</h1>
+      <div class="header-top">
+        <h1>Empire Hub Phones</h1>
+        <div class="logbtns">
+          <button class="login-button">Login</button>
+          <button class="sign-up-button">Sign up</button>
+        </div>
+      </div>
       <div>
         <ul id="nav">
-          <!--navigation: in tabs, at each li: show relative section in main section when clicked, and a blue 3px underline on active li-->
           <li><a href="#hero">Home</a></li>
           <li><a href="#aboutUs">About Us</a></li>
           <li><a href="#ProductsServices">Products and Services</a></li>
@@ -27,10 +32,18 @@
         </ul>
       </div>
     </header>
+
     <!--content: link to nav, add styling-->
-    <!--each div should fit the whole screen below the header. add smooth animation when user scrolls into view, the div floats up or down depending on direction of scroll and fades in. when scrolled out of view, it fades out and floats up or down depending on direction of scroll-->
     <section class="main">
-      <div id="hero" class="section">Hero Section</div>
+      <div id="hero" class="section">
+        <div class="hero-section">
+          <div class="hero-content">
+            <h1>Empire Hub Phones</h1>
+            <p>Discover the Future of Smartphones</p>
+            <a href="/" class="cta-btn">Shop Now</a>
+          </div>
+        </div>
+      </div>
       <div id="aboutUs" class="section">
         <div class="faqs-container" id="faqs">
           <h2>Frequently Asked Questions</h2>
@@ -266,7 +279,11 @@
                 <li>A description of the issue.</li>
                 <li>Screenshots or error messages (if applicable).</li>
               </ul>
-              <button class="report-btn">Submit Report</button>
+              <button class="report-btn">
+                <a href="/report-page.html" target="_blank" class="report-link">
+                  Write a Report
+                </a>
+              </button>
             </div>
           </div>
         </div>
@@ -346,7 +363,6 @@
 
       sections.forEach((section) => observer.observe(section));
     </script>
-
     <script>
       // JavaScript to toggle FAQ answers
       const faqQuestions = document.querySelectorAll('.faq-question');
@@ -368,6 +384,5 @@
         });
       });
     </script>
-
   </body>
 </html>
