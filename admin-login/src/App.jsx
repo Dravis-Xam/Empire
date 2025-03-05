@@ -1,8 +1,7 @@
 import React from 'react';
-import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
-import Login from './components/Login';
-import AdminPage from './components/AdminPage';
-
+import { BrowserRouter as Router, Routes, Route, Navigate } from 'react-router-dom';
+import Login from './components/login';
+import AdminPage from './components/adminPage';
 
 const App = () => {
     return (
