@@ -6,6 +6,7 @@ import { useLocation, useNavigate } from 'react-router-dom';
 export default function Payment() {
   const location = useLocation();
   const navigate = useNavigate();
+  const userInfo = useSelector((state) => state.auth.userInfo);
   const { cartItems, totalPrice, discount, discountedPrice } = location.state || {
     cartItems: [],
     totalPrice: 0,
@@ -89,11 +90,37 @@ export default function Payment() {
     });
   };
 
-  const handlePayment = () => {
+  const handlePayment = async () => {
     console.log('Payment Details:', paymentDetails);
-    alert('Payment processed successfully!');
-    navigate('/');
-  };
+
+    try {
+        const response = await fetch('http://localhost:5000/api/buy', {
+            method: 'POST',
+            headers: {
+                'Content-Type': 'application/json',
+            },
+            body: JSON.stringify({
+                paymentDetails,
+                cartItems,
+                userInfo
+            }),
+        });
+
+        if (!response.ok) {
+            const errorText = await response.text();
+            throw new Error(errorText || 'Failed to process payment');
+        }
+
+        const data = await response.json();
+        console.log('Payment processed successfully:', data);
+
+        alert('Payment processed successfully!');
+        navigate('/'); // Redirect to the home page
+    } catch (error) {
+        console.error('Error processing payment:', error);
+        alert(error.message || 'Failed to process payment. Please try again.');
+    }
+};
 
   return (
     <div className='payment-container-overlay' onClick={() => navigate('/')}>

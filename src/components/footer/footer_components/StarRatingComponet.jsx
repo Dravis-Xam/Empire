@@ -9,6 +9,7 @@ const StarRatingComponent = () => {
 
   // Get authentication state from authSlice
   const { isAuthenticated } = useSelector((state) => state.auth);
+  const { loading, error } = useSelector((state) => state.review);
 
   const handleStarClick = (value) => {
     setRating(value);
@@ -27,9 +28,19 @@ const StarRatingComponent = () => {
       alert("You must be signed in to leave a comment.");
       return;
     }
-    dispatch(addReview({ rating, comment }));
-    setRating(0);
-    setComment("");
+
+    // Dispatch the addReview action with the review data
+    dispatch(addReview({ rating, comment }))
+      .unwrap() // Handle the promise returned by the async action
+      .then(() => {
+        alert("Review submitted successfully!");
+        setRating(0);
+        setComment("");
+      })
+      .catch((error) => {
+        console.error("Error submitting review:", error);
+        alert("Failed to submit review. Please try again.");
+      });
   };
 
   return (
@@ -62,8 +73,13 @@ const StarRatingComponent = () => {
       ) : (
         <p style={styles.signInMessage}>Please sign in to leave a comment.</p>
       )}
-      <button style={styles.button} onClick={handleSubmit}>
-        Submit
+      {error && <p style={styles.errorMessage}>{error}</p>}
+      <button
+        style={styles.button}
+        onClick={handleSubmit}
+        disabled={loading} // Disable the button while loading
+      >
+        {loading ? "Submitting..." : "Submit"}
       </button>
     </div>
   );
@@ -110,6 +126,10 @@ const styles = {
     fontSize: "1rem",
   },
   signInMessage: {
+    color: "#ff0000",
+    marginTop: "10px",
+  },
+  errorMessage: {
     color: "#ff0000",
     marginTop: "10px",
   },

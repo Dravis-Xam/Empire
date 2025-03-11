@@ -10,6 +10,7 @@ import Cart from './components/cart/Cart';
 import Profile from './components/Profile/Profile';
 import AuthFormsContainer from './components/SignIn_signup/AuthFormsContainer';
 import Payment from './components/payment/Payment';
+import './index.css';
 
 function Carrier() {
   const dispatch = useDispatch();
@@ -24,7 +25,7 @@ function Carrier() {
     });
   }, [dispatch]);
 
-  if (authLoading || !reducersLoaded) return <div>Loading...</div>;
+  if (authLoading || !reducersLoaded) return <div className='loading-animation-container'></div>;
 
   return (
     <Routes>

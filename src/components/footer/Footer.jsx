@@ -8,6 +8,7 @@ import titleBg from '../../../public/EHP-1.png';
 import HelpSc from './footer_components/help-sc';
 import JobsSc from './footer_components/JobsSc';
 import StarRatingComponent from './footer_components/StarRatingComponet'
+import Chat from './footer_components/Chat'
 
 export default function Footer() {
   return (
@@ -26,8 +27,8 @@ export default function Footer() {
         </div>
       </div>
       <div className='mis-inputs'>
-        <CommentForm />
         <StarRatingComponent />
+        <Chat />
       </div>
     </section>
   )

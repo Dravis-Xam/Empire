@@ -84,6 +84,12 @@ const authSlice = createSlice({
     clearError: (state) => {
       state.error = null;
     },
+    setUserInfo: (state, action) => {
+        state.userInfo = action.payload;
+    },
+    clearUserInfo: (state) => {
+        state.userInfo = null;
+    }
   },
   extraReducers: (builder) => {
     builder
@@ -147,6 +153,8 @@ export const {
   closeSignUpForm,
   signOut,
   clearError,
+  setUserInfo,
+  clearUserInfo
 } = authSlice.actions;
 
 // Export aliases

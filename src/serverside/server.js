@@ -6,6 +6,7 @@ import bodyParser from 'body-parser';
 import { MongoClient } from 'mongodb';
 import dotenv from 'dotenv';
 import path from 'path';
+const { v4: uuidv4 } = require('uuid'); 
 
 // Load environment variables
 dotenv.config();
@@ -100,8 +101,94 @@ app.post('/api/login', async (req, res) => {
   }
 });
 
+app.post('/api/buy', async (req, res) => {
+    const { paymentDetails } = req.body;
+
+    try {
+        // Validate payment details
+        if (!paymentDetails || !paymentDetails.cardNumber || !paymentDetails.expiryDate || !paymentDetails.cvv) {
+            return res.status(400).json({ message: 'Invalid payment details' });
+        }
+
+        // Generate transaction ID and date
+        const transactionId = uuidv4(); // Generate a unique transaction ID
+        const transactionDate = new Date(); // Current date and time
+
+        // Create transaction object
+        const transaction = {
+            transactionId,
+            date: transactionDate,
+            paymentDetails,
+            cartItems
+        };
+
+        // Save transaction to the database
+        const database = client.db('transactions');
+        const transactionsCollection = database.collection('ts');
+        await transactionsCollection.insertOne(transaction);
+
+        // Send success response
+        res.status(200).json({ message: 'Payment processed successfully!', transactionId });
+    } catch (error) {
+        console.error('Error processing payment:', error);
+        res.status(500).json({ message: 'Internal server error' });
+    }
+});
+
+
+app.post('/api/review/submit', async (req, res) => {
+  const { rating, comment, userId } = req.body; // Include userId to associate the review with a user
+
+  try {
+    // Validate input
+    if (!rating || !comment || !userId) {
+      return res.status(400).json({ message: 'Rating, comment, and userId are required' });
+    }
+
+    // Connect to MongoDB
+    await client.connect();
+    const database = client.db('users');
+    const collection = database.collection('userratings');
+
+    // Create review object
+    const review = {
+      userId, // Associate the review with the user
+      rating,
+      comment,
+      date: new Date(), // Add the current date
+    };
+
+    // Insert the review into the userratings collection
+    const result = await collection.insertOne(review);
+    res.status(201).json({ message: 'Review submitted successfully', reviewId: result.insertedId });
+  } catch (error) {
+    console.error('Error submitting review:', error);
+    res.status(500).json({ message: 'Internal server error' });
+  } finally {
+    await client.close(); // Close the MongoDB connection
+  }
+});
+
+app.get('/api/review', async (req, res) => {
+  try {
+    // Connect to MongoDB
+    await client.connect();
+    const database = client.db('users');
+    const collection = database.collection('userratings');
+
+    // Fetch all reviews from the userratings collection
+    const reviews = await collection.find({}).toArray();
+    res.status(200).json(reviews);
+  } catch (error) {
+    console.error('Error fetching reviews:', error);
+    res.status(500).json({ message: 'Internal server error' });
+  } finally {
+    await client.close(); // Close the MongoDB connection
+  }
+});
+
 // Serve frontend in production
-if (process.env.NODE_ENV === 'production') {
+/*if (process.env.NODE_ENV === 'production') {
   const __dirname = path.resolve();
   app.use(express.static(path.join(__dirname, '../frontend/dist')));
 
@@ -110,6 +197,7 @@ if (process.env.NODE_ENV === 'production') {
     res.sendFile(path.join(__dirname, '../frontend/dist/index.html'));
   });
 }
+*/
 
 // Start Server
 const PORT = process.env.PORT || 5000;
