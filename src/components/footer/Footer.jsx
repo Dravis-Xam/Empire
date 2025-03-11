@@ -1,7 +1,6 @@
 import React from 'react'
 import "./footer.css"
 import SocialAccContainer from './footer_components/social-acc-container'
-import CommentForm from './footer_components/CommentForm'
 import AboutUs from './footer_components/AboutUs'
 import PnsSection from './footer_components/PnsSection';
 import titleBg from '../../../public/EHP-1.png';

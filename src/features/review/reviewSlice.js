@@ -34,7 +34,7 @@ const reviewsSlice = createSlice({
     loading: false,
     error: null,
   },
-  reducers: {},
+  reducers: {}, // No need for addReview reducer
   extraReducers: (builder) => {
     builder
       // Submit Review

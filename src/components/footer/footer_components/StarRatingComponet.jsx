@@ -1,6 +1,6 @@
 import React, { useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
-import { addReview } from "../../../features/review/reviewSlice";
+import { submitReview } from "../../../features/review/reviewSlice"; // Import submitReview instead of addReview
 
 const StarRatingComponent = () => {
   const [rating, setRating] = useState(0);
@@ -9,7 +9,6 @@ const StarRatingComponent = () => {
 
   // Get authentication state from authSlice
   const { isAuthenticated } = useSelector((state) => state.auth);
-  const { loading, error } = useSelector((state) => state.review);
 
   const handleStarClick = (value) => {
     setRating(value);
@@ -29,8 +28,8 @@ const StarRatingComponent = () => {
       return;
     }
 
-    // Dispatch the addReview action with the review data
-    dispatch(addReview({ rating, comment }))
+    // Dispatch the submitReview action with the review data
+    dispatch(submitReview({ rating, comment })) // Use submitReview here
       .unwrap() // Handle the promise returned by the async action
       .then(() => {
         alert("Review submitted successfully!");
@@ -73,13 +72,11 @@ const StarRatingComponent = () => {
       ) : (
         <p style={styles.signInMessage}>Please sign in to leave a comment.</p>
       )}
-      {error && <p style={styles.errorMessage}>{error}</p>}
       <button
         style={styles.button}
         onClick={handleSubmit}
-        disabled={loading} // Disable the button while loading
       >
-        {loading ? "Submitting..." : "Submit"}
+        Submit
       </button>
     </div>
   );
