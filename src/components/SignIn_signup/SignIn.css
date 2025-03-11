@@ -18,7 +18,7 @@
     z-index: 600;
     border-radius: 8px;
     width: 40%;
-    font-family: Montserrat;
+    font-family: Montserrat, arial;
     display: flex;
     flex-direction: column;
     position: relative;

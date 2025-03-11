@@ -23,7 +23,7 @@
 }
 
 .cart-items {
-  font-family: Montserrat;
+  font-family: Montserrat, arial;
   display: flex;
   flex-direction: column;
   gap: 8px;
@@ -64,7 +64,7 @@
 .info-cart {
   height: 50px;
   width: fit-content;
-  font-family: Montserrat;
+  font-family: Montserrat, arial;
 }
 
 .item-checkbox {

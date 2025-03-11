@@ -1,5 +1,5 @@
-import React, { useState } from 'react';
-import TransactionRow from './TransactionRow'
+import React, { useState, useEffect } from 'react';
+import TransactionRow from './TransactionRow';
 
 const AdminPage = () => {
     const [isManageVisible, setIsManageVisible] = useState(false);
@@ -12,7 +12,6 @@ const AdminPage = () => {
     const [product, setProduct] = useState({
         name: '',
         price: 0,
-        itemId: 0, // Will be auto-generated
         details: {
             ram: '',
             i_storage: '',
@@ -26,6 +25,7 @@ const AdminPage = () => {
         quantity: 0,
         brand: '',
     });
+    const [products, setProducts] = useState([]);
 
     const transactions = [
         { id: 1, customer: "John Doe", items: "Oppo", amount: "$100", initialStatus: "Pending" },
@@ -52,6 +52,33 @@ const AdminPage = () => {
         }
     };
 
+    const fetchProducts = async () => {
+        try {
+            const response = await fetch('http://localhost:3000/api/admin/getProducts'); // Replace with your backend endpoint
+            if (!response.ok) {
+                const errorText = await response.text();
+                throw new Error(errorText || 'Failed to fetch products');
+            }
+            const data = await response.json();
+            setProducts(data);
+        } catch (error) {
+            console.error('Error fetching products:', error);
+            alert('Failed to fetch products. Please try again.');
+        }
+    };
+
+    useEffect(() => {
+        fetchProducts();
+    }, []);
+
+    const populateForm = (product) => {
+        setProduct({
+            ...product,
+            quantity: 0, // Reset quantity
+            price: 0, // Reset price
+        });
+    };
+
     const handleSubmit = async (e) => {
         e.preventDefault();
     
@@ -66,18 +93,18 @@ const AdminPage = () => {
         setIsLoading(true);
     
         try {
-            const response = await fetch('/api/admin/products', {
+            const response = await fetch('http://localhost:3000/api/admin/addProducts', {
                 method: 'POST',
                 headers: {
                     'Content-Type': 'application/json',
                 },
-                body: JSON.stringify(product),
+                body: JSON.stringify({ product }), // Send only the product object
             });
     
             if (!response.ok) {
                 const errorText = await response.text(); // Log the raw response
                 console.error('Server error:', errorText);
-                throw new Error('Failed to add product');
+                throw new Error(errorText || 'Failed to add product'); // Use server error message
             }
     
             const newProduct = await response.json();
@@ -88,7 +115,6 @@ const AdminPage = () => {
             setProduct({
                 name: '',
                 price: 0,
-                itemId: 0,
                 details: {
                     ram: '',
                     i_storage: '',
@@ -104,7 +130,7 @@ const AdminPage = () => {
             });
         } catch (error) {
             console.error('Error adding product:', error);
-            alert('Failed to add product. Please try again.');
+            alert(error.message || 'Failed to add product. Please try again.'); // Show server error message
         } finally {
             setIsLoading(false); // Reset loading state
         }
@@ -251,7 +277,41 @@ const AdminPage = () => {
 
                     {activeTab === 'products' && (
                         <div className="card">
-                            <h3>Manage Products</h3>
+                            
+                            <div className='existing-products'>
+                                <h3>All Products</h3>
+                                <div className='existing-products-container'>
+                                    <table>
+                                        <thead>
+                                            <tr>
+                                                <th>Product Name</th>
+                                                <th>Quantity</th>
+                                                <th>Date Added</th>
+                                                <th>Action</th>
+                                            </tr>
+                                        </thead>
+                                        <tbody>
+                                            {products.map((product) => (
+                                                <tr key={product._id}>
+                                                    <td>{product.name}</td>
+                                                    <td>{product.quantity}</td>
+                                                    <td>{new Date(product.dateAdded).toLocaleDateString()}</td>
+                                                    <td>
+                                                        <button
+                                                            onClick={() => populateForm(product)}
+                                                            className="populate-button"
+                                                        >
+                                                            Fill Form
+                                                        </button>
+                                                    </td>
+                                                </tr>
+                                            ))}
+                                        </tbody>
+                                    </table>
+                                </div>
+                            </div>
+                            
+                            <h3 className='product-form-title'>Manage Products</h3>
                             <form className="product-form" onSubmit={handleSubmit}>
                                 <div className="form-group">
                                     <label htmlFor="name">Product Name</label>

@@ -52,7 +52,7 @@ app.post('/api/login', async (req, res) => {
     console.log('Login request:', { username, password });
 
     try {
-        const database = client.db('Empire');
+        const database = client.db('users');
         const collection = database.collection('adminUsers');
 
         // Query for the "username" field
@@ -70,6 +70,49 @@ app.post('/api/login', async (req, res) => {
         res.status(500).json({ message: 'Internal server error' });
     }
 });
+
+app.post('/api/admin/addProducts', async (req, res) => {
+    const { product } = req.body; // Extract product data from the request body
+    console.log('Add product request:', product);
+
+    try {
+        const database = client.db('Empire');
+        const productsCollection = database.collection('productsList');
+
+        // Validate required fields
+        if (!product.name || !product.price || !product.brand) {
+            return res.status(400).json({ message: 'Missing required fields' });
+        }
+
+        product.dateAdded = new Date();
+
+        // Insert the product into the productsList collection
+        const result = await productsCollection.insertOne(product);
+        console.log('Product inserted:', result.insertedId);
+
+        res.status(200).json({ message: 'Product added successfully!', productId: result.insertedId });
+    } catch (error) {
+        console.error('Error:', error);
+        res.status(500).json({ message: 'Internal server error', error: error.message });
+    }
+});
+
+app.get('/api/admin/getProducts', async (req, res) => {
+    try {
+        const database = client.db('Empire');
+        const productsCollection = database.collection('productsList');
+
+        // Fetch all products
+        const products = await productsCollection.find({}).toArray();
+
+        console.log('Found: ', products);
+        res.status(200).json(products);
+    } catch (error) {
+        console.error('Error fetching products:', error);
+        res.status(500).json({ message: 'Internal server error' });
+    }
+});
+
 
 // Start the server
 app.listen(port, () => {

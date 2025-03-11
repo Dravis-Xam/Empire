@@ -22,7 +22,7 @@ const Login = () => {
         if (isLoading) return; // Prevent multiple submissions
 
         setIsLoading(true);
-        setMessage('');
+        setMessage(''); 
 
         try {
             // Send login request to the backend

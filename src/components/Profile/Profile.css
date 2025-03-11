@@ -10,6 +10,7 @@
   text-align: center;
   width: 300px;
   z-index: 1000; /* Ensure it appears above other content */
+  font-family: Montserrat, arial;
 }
 
 .close-btn {
@@ -19,6 +20,7 @@
   background: none;
   border: none;
   cursor: pointer;
+  font-family: Montserrat, arial;
 }
 
 .see-acc-btn {
@@ -29,6 +31,7 @@
   border: none;
   border-radius: 5px;
   cursor: pointer;
+  font-family: Montserrat, arial;
 }
 
 .log-out-btn {
@@ -36,6 +39,7 @@
   background: none;
   border: none;
   cursor: pointer;
+  font-family: Montserrat, arial;
 }
 
 .log-out-btn img {
@@ -51,6 +55,8 @@
   border: none;
   border-radius: 5px;
   cursor: pointer;
+
+  font-family: Montserrat, arial;
 }
 
 .sign-in-btn:hover {

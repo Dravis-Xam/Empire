@@ -12,7 +12,7 @@ header {
   transition: transform 0.3s ease-in-out;
   z-index: 950;
   padding: 10px 20px; /* Add padding for better spacing */
-  font-family: Noto sans;
+  font-family: Noto sans, sans-serif;
 }
 
 .header-top {
@@ -117,7 +117,7 @@ header ul li a.active {
     justify-content: center;
     text-align: center;
     width: 100%;
-    color: #fff;
+    color: #e2baba;
   }
   
   .hero-content h1 {

@@ -27,7 +27,7 @@
   margin: 120px auto 50px; /* Centered with top margin */
   box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2); /* Subtle shadow for depth */
   z-index: 100;
-  font-family: Montserrat;
+  font-family: Montserrat, arial;
 }
 
 .form-title {
