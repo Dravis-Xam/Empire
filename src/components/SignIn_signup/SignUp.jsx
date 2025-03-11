@@ -15,7 +15,7 @@ export default function SignUpForm() {
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
 
-  useEffect(() => {
+  useEffect(() => { 
     if (error) {
       const timer = setTimeout(() => {
         dispatch(clearError());

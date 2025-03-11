@@ -31,7 +31,7 @@ const StarRatingComponent = ({ isSignedIn }) => {
 
   return (
     <div style={styles.container}>
-      <h2 className="rating-title">Rate Our App</h2>
+      <h2 className="rating-title">Rate Our Site</h2>
       <div style={styles.stars}>
         {[1, 2, 3, 4, 5].map((value) => (
           <span

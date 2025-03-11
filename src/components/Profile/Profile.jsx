@@ -5,7 +5,7 @@ import { X } from "lucide-react";
 import './Profile.css'
 
 export default function Profile({ onClose }) {
-  const dispatch = useDispatch();
+  const dispatch = useDispatch(); 
 
   // Get user data from the Redux store
   const { userInfo, isAuthenticated } = useSelector((state) => state.auth);

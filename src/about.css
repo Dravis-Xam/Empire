@@ -194,3 +194,10 @@ header ul li a.active {
       margin: none;
     }
   }  
+
+  @media (max-width: 800px) {
+    .section {
+      flex-wrap: wrap;
+      height: fit-content;
+    }
+  }

@@ -1,6 +1,7 @@
+// Login.jsx
 import React, { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
-import "./login.css"
+import './login.css';
 
 const Login = () => {
     const [username, setUsername] = useState('');
@@ -24,7 +25,8 @@ const Login = () => {
         setMessage('');
 
         try {
-            const response = await fetch('/api/login', {
+            // Send login request to the backend
+            const response = await fetch('http://localhost:3000/api/login', {
                 method: 'POST',
                 headers: {
                     'Content-Type': 'application/json',
@@ -32,7 +34,10 @@ const Login = () => {
                 body: JSON.stringify({ username, password }),
             });
 
+            console.log('Response status:', response.status); // Debug log
+
             const data = await response.json();
+            console.log('Response data:', data); // Debug log
 
             if (response.ok) {
                 setMessage('Login successful! Redirecting...');

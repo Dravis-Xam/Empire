@@ -3,12 +3,12 @@ import { useDispatch, useSelector } from 'react-redux';
 import { Routes, Route, useNavigate } from 'react-router-dom';
 import { initializeAuth } from './features/auth/authSlice'; 
 import ProtectedRoute from './features/auth/ProtectedRoute';
-import SignInForm from './components/SignIn|signup/SignIn';
-import SignUpForm from './components/SignIn|signup/SignUp';
+import SignInForm from './components/SignIn_signup/SignIn';
+import SignUpForm from './components/SignIn_signup/SignUp';
 import App from './App';
 import Cart from './components/cart/Cart';
 import Profile from './components/Profile/Profile';
-import AuthFormsContainer from './components/SignIn|signup/AuthFormsContainer';
+import AuthFormsContainer from './components/SignIn_signup/AuthFormsContainer';
 import Payment from './components/payment/Payment';
 
 function Carrier() {

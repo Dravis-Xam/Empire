@@ -3,7 +3,7 @@ import { useDispatch, useSelector } from 'react-redux';
 import { X } from 'lucide-react';
 import { 
   closeSignInForm, 
-  openSignUpForm, 
+  openSignUpForm,  
   signIn, 
   clearError 
 } from '../../features/auth/authSlice';
