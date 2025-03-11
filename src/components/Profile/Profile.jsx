@@ -2,16 +2,16 @@ import React from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { signOut, openSignInForm } from "../../features/auth/authSlice";
 import { X } from "lucide-react";
-import './Profile.css'
+import './Profile.css';
 
 export default function Profile({ onClose }) {
-  const dispatch = useDispatch(); 
+  const dispatch = useDispatch();
 
   // Get user data from the Redux store
   const { userInfo, isAuthenticated } = useSelector((state) => state.auth);
 
   const handleLogout = () => {
-    dispatch(signOut());
+    dispatch(signOut()); // Dispatch the signOut action
     onClose(); // Close the profile panel after logout
   };
 

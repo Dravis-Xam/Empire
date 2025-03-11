@@ -16,8 +16,8 @@ export const signIn = createAsyncThunk(
   "auth/signIn",
   async ({ email, password }, { rejectWithValue }) => {
     try {
-      const response = await api.post("/signin", { email, password });
-      return response.data; // Return both token and user info
+      const response = await api.post("/api/login", { email, password }); // Updated endpoint
+      return { token: response.data.token, user: { email } }; // Return token and user info
     } catch (error) {
       return rejectWithValue(
         error.response?.data?.error || "Sign in failed. Please check your credentials."
@@ -30,8 +30,8 @@ export const signUp = createAsyncThunk(
   "auth/signUp",
   async ({ username, email, password }, { rejectWithValue }) => {
     try {
-      const response = await api.post("/signup", { username, email, password });
-      return response.data; // Return both token and user info
+      const response = await api.post("/api/signup", { username, email, password }); // Updated endpoint
+      return { token: response.data.token, user: { username, email } }; // Return token and user info
     } catch (error) {
       return rejectWithValue(
         error.response?.data?.error || "Registration failed. Please try again."
@@ -136,7 +136,7 @@ const authSlice = createSlice({
         state.loading = false;
         state.error = action.payload;
       });
-  }, 
+  },
 });
 
 // Export all actions

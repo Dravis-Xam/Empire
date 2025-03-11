@@ -14,6 +14,7 @@ export default function SignUpForm() {
   const [username, setUsername] = useState('');
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
+  const [showPassword, setShowPassword] = useState(false);
 
   useEffect(() => { 
     if (error) {
@@ -74,7 +75,7 @@ export default function SignUpForm() {
           </div>
           <div className='input-container'>
             <input
-              type='password'
+              type={showPassword ? 'text' : 'password'}
               value={password}
               onChange={(e) => setPassword(e.target.value)}
               placeholder=' '
@@ -82,6 +83,14 @@ export default function SignUpForm() {
             />
             <label>Password</label>
           </div>
+          <button
+              type='button'
+              onClick={() => setShowPassword(!showPassword)}
+              className='password-toggle'
+              aria-label={showPassword ? 'Hide password' : 'Show password'}
+            >
+              {showPassword ? 'Hide' : 'Show'}
+            </button>
           <button type='submit' className='submit-button'>Sign Up</button>
         </form>
         <p>

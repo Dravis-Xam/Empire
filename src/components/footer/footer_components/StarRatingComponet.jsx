@@ -2,10 +2,13 @@ import React, { useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { addReview } from "../../../features/review/reviewSlice";
 
-const StarRatingComponent = ({ isSignedIn }) => {
+const StarRatingComponent = () => {
   const [rating, setRating] = useState(0);
   const [comment, setComment] = useState("");
   const dispatch = useDispatch();
+
+  // Get authentication state from authSlice
+  const { isAuthenticated } = useSelector((state) => state.auth);
 
   const handleStarClick = (value) => {
     setRating(value);
@@ -20,7 +23,7 @@ const StarRatingComponent = ({ isSignedIn }) => {
       alert("Please select a rating before submitting.");
       return;
     }
-    if (!isSignedIn) {
+    if (!isAuthenticated) {
       alert("You must be signed in to leave a comment.");
       return;
     }
@@ -49,7 +52,7 @@ const StarRatingComponent = ({ isSignedIn }) => {
       <p style={styles.ratingText}>
         Your rating: <span>{rating}</span>/5
       </p>
-      {isSignedIn ? (
+      {isAuthenticated ? (
         <textarea
           style={styles.textarea}
           placeholder="Leave a comment about your experience..."

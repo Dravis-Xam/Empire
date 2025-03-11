@@ -4,29 +4,21 @@ import bcrypt from 'bcryptjs';
 import cors from 'cors';
 import bodyParser from 'body-parser';
 import { MongoClient } from 'mongodb';
-import { fileURLToPath } from 'url';
+import dotenv from 'dotenv';
 import path from 'path';
 
-const __filename = fileURLToPath(import.meta.url);
-const __dirname = path.dirname(__filename);
+// Load environment variables
+dotenv.config();
 
 const app = express();
 
 // Middleware
 app.use(cors());
 app.use(bodyParser.json());
-app.use(express.static(path.join(__dirname, 'public'), {
-  setHeaders: (res, filePath) => {
-    if (filePath.endsWith('.jsx')) {
-      res.setHeader('Content-Type', 'application/javascript');
-    }
-  },
-}));
 
 // Environment Variables
-const SECRET_KEY = process.env.JWT_SECRET || 'your-strong-secret-key';
-const EXPIRATION = '1h';
-const MONGODB_URI = process.env.MONGODB_URI || 'your-mongodb-atlas-connection-string';
+const SECRET_KEY = process.env.JWT_SECRET || 'fallback-secret-key';
+const MONGODB_URI = process.env.MONGODB_URI;
 
 // MongoDB Client
 const client = new MongoClient(MONGODB_URI, { useNewUrlParser: true, useUnifiedTopology: true });
@@ -70,7 +62,7 @@ app.post('/api/signup', async (req, res) => {
     const userId = result.insertedId;
 
     // Generate JWT
-    const token = jwt.sign({ userId, email }, SECRET_KEY, { expiresIn: EXPIRATION });
+    const token = jwt.sign({ userId, email }, SECRET_KEY, { expiresIn: '1h' });
     res.status(201).json({ token });
   } catch (error) {
     console.error('Signup error:', error);
@@ -100,13 +92,24 @@ app.post('/api/login', async (req, res) => {
     }
 
     // Generate JWT
-    const token = jwt.sign({ userId: user._id, email }, SECRET_KEY, { expiresIn: EXPIRATION });
+    const token = jwt.sign({ userId: user._id, email }, SECRET_KEY, { expiresIn: '1h' });
     res.json({ token });
   } catch (error) {
     console.error('Login error:', error);
     res.status(500).json({ error: 'Login failed' });
   }
 });
+
+// Serve frontend in production
+if (process.env.NODE_ENV === 'production') {
+  const __dirname = path.resolve();
+  app.use(express.static(path.join(__dirname, '../frontend/dist')));
+
+  // Serve index.html for all routes
+  app.get('*', (req, res) => {
+    res.sendFile(path.join(__dirname, '../frontend/dist/index.html'));
+  });
+}
 
 // Start Server
 const PORT = process.env.PORT || 5000;
