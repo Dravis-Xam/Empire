@@ -79,36 +79,35 @@ header ul li a.active {
   font-weight: 700;
 }
 
-/* Media Query for Screens Less Than 1000px */
 @media (max-width: 1000px) {
   .header-top {
-    flex-direction: row; /* Keep title and buttons in the same row */
+    flex-direction: row;
     align-items: center;
     justify-content: space-between;
   }
 
   header ul {
-    justify-content: center; /* Center the navigation items */
-    margin-top: 20px; /* Add space between the top row and nav */
+    justify-content: center;
+    margin-top: 20px; 
   }
 
   header ul li {
-    margin: 0 5px; /* Reduce spacing between nav items */
+    margin: 0 5px;
   }
 
   header ul li a {
-    padding: 5px; /* Adjust padding for smaller screens */
+    padding: 5px; 
   }
 }
 
 
   /* Main Section Styles */
   .main {
-    margin-top: 60px; /* Adjust based on header height */
+    margin-top: 60px;
   } 
 
   .hero-section {
-    background-image: url('https://img.freepik.com/free-vector/amber-background-design_23-2150317731.jpg?t=st=1740959377~exp=1740962977~hmac=358ce6e04519f02c7e4a17d77349aae6b3fcae04ed26a0e11fc53d18cd4b9dc5&w=1800'); /* Replace with your image */
+    background-image: url('https://img.freepik.com/free-vector/amber-background-design_23-2150317731.jpg?t=st=1740959377~exp=1740962977~hmac=358ce6e04519f02c7e4a17d77349aae6b3fcae04ed26a0e11fc53d18cd4b9dc5&w=1800');
     background-size: cover;
     background-position: center;
     height: 100vh;
