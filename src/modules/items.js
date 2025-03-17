@@ -1,6 +1,38 @@
 //src/modules/items.jsx
  
-const items = [
+// Function to fetch products from the backend
+const fetchProducts = async () => {
+    try {
+      const response = await fetch('http://localhost:5000/api/products');
+      if (!response.ok) {
+        throw new Error('Failed to fetch products');
+      }
+      const data = await response.json();
+      return data; // Return the fetched data
+    } catch (error) {
+      console.error('Error fetching products:', error);
+      throw error;
+    }
+};
+  
+  // Function to update the items list and cache it
+const updateItemsList = async () => {
+    const lastFetchTime = localStorage.getItem('lastFetchTime');
+    const cachedProducts = localStorage.getItem('products');
+  
+    // Check if cached data exists and is less than 3 days old
+    if (cachedProducts && lastFetchTime && (new Date().getTime() - lastFetchTime < 3 * 24 * 60 * 60 * 1000)) {
+      return JSON.parse(cachedProducts); // Use cached data
+    } else {
+      const products = await fetchProducts(); // Fetch new data
+      localStorage.setItem('products', JSON.stringify(products)); // Cache the data
+      localStorage.setItem('lastFetchTime', new Date().getTime()); // Store the last fetch time
+      return products;
+    }
+};
+  
+
+  let items = [
     {
         name: "ZTE Nubic Red Magic Pro",
         price: 60000,
@@ -84,5 +116,19 @@ const items = [
     }
 ];
 
+ 
+  
+  // Fetch and update the items list
+  updateItemsList()
+    .then((data) => {
+      items = data; // Update the items list with the fetched data
+    })
+    .catch((error) => {
+      console.error('Error updating items list:', error);
+    });
+  
+  // Export the items list
+  export default items;
 
-export default items;
+
+

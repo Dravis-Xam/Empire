@@ -15,6 +15,8 @@ import './index.css';
 function Carrier() {
   const dispatch = useDispatch();
   const navigate = useNavigate();
+  const [minDelayPassed, setMinDelayPassed] = useState(false);
+
   const { loading: authLoading } = useSelector((state) => state.auth);
   const [reducersLoaded, setReducersLoaded] = useState(false);
  // Get discount from Redux store
@@ -25,7 +27,17 @@ function Carrier() {
     });
   }, [dispatch]);
 
-  if (authLoading || !reducersLoaded) return <div className='loading-animation-container'></div>;
+  useEffect(() => {
+    const timer = setTimeout(() => {
+      setMinDelayPassed(true);
+    }, 3000); 
+
+    return () => clearTimeout(timer);
+  }, []);
+
+  if (authLoading || !reducersLoaded || !minDelayPassed) {
+    return <div className='loading-animation-container'></div>;
+  }
 
   return (
     <Routes>

@@ -2,6 +2,7 @@ import React, { useState, useEffect } from 'react';
 import './payment.css';
 import { ChevronDown, X } from 'lucide-react';
 import { useLocation, useNavigate } from 'react-router-dom';
+import { useSelector } from 'react-redux';
 
 export default function Payment() {
   const location = useLocation();

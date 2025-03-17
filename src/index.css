@@ -15,7 +15,7 @@ font {
   .loading-animation-container::after {
     content: '';
     position: absolute;
-    top: 0;
+    top: 350px;
     left: 0;
     width: 100%;
     height: 100%;

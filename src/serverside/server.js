@@ -5,7 +5,6 @@ import cors from 'cors';
 import bodyParser from 'body-parser';
 import { MongoClient } from 'mongodb';
 import dotenv from 'dotenv';
-import path from 'path';
 const { v4: uuidv4 } = require('uuid'); 
 
 // Load environment variables
@@ -24,7 +23,8 @@ const MONGODB_URI = process.env.MONGODB_URI;
 // MongoDB Client
 const client = new MongoClient(MONGODB_URI, { useNewUrlParser: true, useUnifiedTopology: true });
 
-// Connect to MongoDB
+// Connect to MongoDB/
+/*
 let db;
 async function connectToDatabase() {
   try {
@@ -37,7 +37,7 @@ async function connectToDatabase() {
   }
 }
 connectToDatabase();
-
+*/
 // Routes
 app.post('/api/signup', async (req, res) => {
   try {
@@ -186,6 +186,23 @@ app.get('/api/review', async (req, res) => {
     await client.close(); // Close the MongoDB connection
   }
 });
+
+
+app.get('/api/products', async (req, res) => {
+  try {
+    await client.connect();
+    const database = client.db('Empire');
+    const collection = database.collection('productsList');
+    const products = await collection.find({}).toArray();
+    res.status(200).json(products);
+  } catch (error) {
+    console.error('Error fetching products:', error);
+    res.status(500).json({ message: 'Internal server error' });
+  } finally {
+    await client.close();
+  }
+});
+
 
 // Serve frontend in production
 /*if (process.env.NODE_ENV === 'production') {

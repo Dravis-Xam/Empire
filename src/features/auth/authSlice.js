@@ -16,7 +16,7 @@ export const signIn = createAsyncThunk(
   "auth/signIn",
   async ({ email, password }, { rejectWithValue }) => {
     try {
-      const response = await api.post("/api/login", { email, password }); // Updated endpoint
+      const response = await api.post("http://localhost:5000/api/login", { email, password }); // Updated endpoint
       return { token: response.data.token, user: { email } }; // Return token and user info
     } catch (error) {
       return rejectWithValue(
@@ -30,7 +30,7 @@ export const signUp = createAsyncThunk(
   "auth/signUp",
   async ({ username, email, password }, { rejectWithValue }) => {
     try {
-      const response = await api.post("/api/signup", { username, email, password }); // Updated endpoint
+      const response = await api.post("http://localhost:5000/api/signup", { username, email, password }); // Updated endpoint
       return { token: response.data.token, user: { username, email } }; // Return token and user info
     } catch (error) {
       return rejectWithValue(
